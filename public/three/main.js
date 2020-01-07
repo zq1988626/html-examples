@@ -1,16 +1,16 @@
 requirejs.config({
     paths: {
-        "jquery":"jquery-1.12.4",
+        "jquery":"/lib/jquery/jquery-1.12.4",
         "tc":"tc",
-        "gui":"js/libs/dat.gui.min",
-        "THREE":"build/three",
-        "OrbitControls":"js/controls/OrbitControls",
-        "CopyShader":"js/shaders/CopyShader",
-        "SimplexNoise":"js/math/SimplexNoise",
-        "EffectComposer":"js/postprocessing/EffectComposer",
-        "SSAOShader":"js/shaders/SSAOShader",
-        "ShaderPass":"js/postprocessing/ShaderPass",
-        "SSAOPass":"js/postprocessing/SSAOPass"
+        "gui":"/lib/threejs/examples/js/libs/dat.gui.min",
+        "THREE":"/lib/threejs/build/three",
+        "OrbitControls":"/lib/threejs/examples/js/controls/OrbitControls",
+        "CopyShader":"/lib/threejs/examples/js/shaders/CopyShader",
+        "SimplexNoise":"/lib/threejs/examples/js/math/SimplexNoise",
+        "EffectComposer":"/lib/threejs/examples/js/postprocessing/EffectComposer",
+        "SSAOShader":"/lib/threejs/examples/js/shaders/SSAOShader",
+        "ShaderPass":"/lib/threejs/examples/js/postprocessing/ShaderPass",
+        "SSAOPass":"/lib/threejs/examples/js/postprocessing/SSAOPass"
     },
     shim:{
         "CopyShader":{deps:["THREE"],exports:"window.THREE.CopyShader"},
