@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ramda.Extend.Format</title>
+    <script src="http://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/ramda/0.26.1/ramda.js"></script>
+</head>
+<body>
+    <h1>Number: <span id="num"></span></h1>
+    <h1>Number: <span id="num1"></span></h1>
+    <h1>Number: <span id="num2"></span></h1>
+    <p> <button id="btn">+</button> </p>
+    <p> <button id="btn1">-</button> </p>
+    <p> <button id="btn2">+</button> </p>
+    <script>
+        var Model = {
+            data: { // 挂载数据
+                num: 0
+            },
+            changeNumber(type) { // 更改状态
+                this.data.num += type === 'add' ? 1 : -1
+                this.noticeView('num', this.data.num) // 通知视图
+            },
+            noticeView() { // 通知视图
+                View.render(...arguments)
+            },
+            init() {
+                this.noticeView('num', this.data.num)
+            }
+        }
+
+        // View 负责数据的展示 接收到Model的通知去渲染视图  ， 接收用户操作后给Controller发送指令
+        var View = {
+            elements: { // 保存视图承载dom
+                num: [
+                    document.querySelector('#num'), 
+                    document.querySelector('#num1'), 
+                    document.querySelector('#num2')
+                ]
+            },
+            render(key, value) { // 展示数据
+                this.elements[key].forEach(element => {
+                    element.innerHTML = value
+                });
+            },
+            bindEvents() {
+                document.querySelector('#btn').onclick = Controller.changeNumber
+                document.querySelector('#btn1').onclick = Controller.changeNumber
+                document.querySelector('#btn2').onclick = Controller.changeNumber
+            },
+            init() {
+                this.bindEvents()
+            }
+        }
+
+        // Controller 接收到view的指令，然后
+        var Controller = {
+            changeNumber() { // 接收到View的指令，要求model进行更新
+                switch (this.innerHTML) {
+                    case '+':
+                        Model.changeNumber('add');
+                        break;
+                    case '-':
+                        Model.changeNumber('reduce');
+                        break;
+                }
+            },
+            init() {
+                Model.init()
+                View.init()
+            }
+        }
+
+        Controller.init();
+    </script>
+</body>
+</html>

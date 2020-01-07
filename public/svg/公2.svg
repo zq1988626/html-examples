@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+<defs>
+<style>
+.cls-1{font-size:10px;}
+.cls-1,.cls-2,
+.cls-4{fill:#e7211a;}
+.cls-1,.cls-2{font-family:AdobeSongStd-Light-GBpc-EUC-H, SimSun;}
+.cls-2{font-size:28px;}
+.cls-3{fill:none;stroke:#e7211a;stroke-miterlimit:10;stroke-width:6px;}
+</style>
+</defs>
+<title>公章效果</title>
+<g id="图层_2" data-name="图层 2">
+<g id="图层_1-2" data-name="图层 1">
+    <text class="cls-1" transform="translate(24.12 93.95) rotate(38.64)">4201190165115</text>
+    <text>
+    <textpath href="#ellipse" class="cls-2">武汉圣纳瑞科技有限公司</textpath>
+    </text>
+    <path class="cls-3" id="ellipse" d="M 200, 200 m -200, 0 a 200,200 0 1,0 400,0 a 200,200 0 1,0 -400,0" />
+    <polygon class="cls-4" points="67.33 71.74 55.98 63.94 45.03 72.3 48.96 59.12 37.61 51.31 51.39 50.97 55.32 37.79 59.91 50.76 73.69 50.41 62.74 58.77 67.33 71.74"/>
+</g>
+</g>
+</svg>

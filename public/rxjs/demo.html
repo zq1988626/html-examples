@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="single-page">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta content="ie=edge"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>RXJS Demo</title>
+    <style>
+        html.single-page{height: 100%;}
+        html.single-page body{height: 100%;margin:0;}
+        .full-height{height:100%}
+        .flex{display: flex;}
+        .flex-column{display: flex;flex-direction:column;}
+        .flex-item{flex: 1;}
+
+        ul{padding:0;margin:0;}
+        ul.menu li{
+            background: #0001;padding:4px;text-align: center;cursor: pointer;
+            transition: background 0.5s;
+            list-style-type:none;
+        }
+        ul.menu li:hover{
+            background: #0003;
+        }
+        ul.menu li.active{
+            background: #0003;
+        }
+
+        .menubox{
+            border-right:2px solid #0168B7;
+        }
+
+        .header{
+            padding:6px;background:#0186D1;color:#fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="full-height"></div>
+    <script src="https://cdn.bootcss.com/react/16.10.2/umd/react.production.min.js"></script>
+    <script src="https://cdn.bootcss.com/react-dom/16.10.2/umd/react-dom.production.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-core/5.8.38/browser.min.js"></script>
+    <script type="text/babel" src="demo.js"></script>
+</body>
+</html>

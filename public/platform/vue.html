@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+
+</head>
+<body>
+    <div id="app">
+        <input v-model="value" />
+        <button @click="onclick">添加</button>
+        <ul>
+            <li v-for="(item,index) in list" :key="index">{{item}}</li>
+        </ul>
+    </div>
+</body>
+
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            value:"333",
+            list:[]
+        },
+        methods:{
+            onclick:function(){
+                this.list.push(this.value);
+            }
+        }
+    })
+</script>
+</html>

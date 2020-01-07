@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ramda.Extend.Format</title>
+    <script src="http://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/ramda/0.26.1/ramda.js"></script>
+</head>
+<body>
+    <div id="container">
+        <input id="text" />
+        <button id="btn">添加</button>
+        <ul id="list"></ul>
+    </div>
+    <script>
+        var Model = {
+            id:"",
+            name:"",
+            list:[
+                {}
+            ]
+        }
+
+        
+        var View = function(option){
+            this.$container = $("#container");
+            var $btn = this.$container.find("#btn");
+            var $input = this.$container.find("#text");
+            var $listContainer = this.$container.find("#list");
+            
+            var _events = {
+                add:function(hander){
+                    $btn.click(function(){
+                        hander()
+                    })
+                }
+            }
+            this.on = function(eventName,hander){
+                _events[eventName](hander)
+            }
+            this.getInput = function(){
+                return $input.val();
+            }
+            this.add = function(data){
+                $listContainer.append($(`<li>${data.name}</li>`));
+            }
+            this.render = function(list){
+                (list||[]).forEach(element => {
+                    $listContainer.append($(`<li>${element}</li>`));
+                });
+            }
+        }
+
+        var Presenter = function(){
+            var view = new View();
+            this.init = function(){
+                view.on("add",function(){
+                    var item = { name:view.getInput() };
+                    view.add(item)
+                    Model.list.push(item);
+                })
+            }
+        };
+
+        (new Presenter()).init();
+
+    </script>
+</body>
+</html>

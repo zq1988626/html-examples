@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>煤场ECharts原型</title>
+</head>
+<body>
+    <div id="main" style="width: 600px;height:400px;"></div>
+    <script src="/lib/echart/4.2.1/echarts.js"></script>
+    <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('main'));
+
+        var N_POINT = 360; // 角度
+        var YMAX = 600; // Y轴放大倍数
+
+        var genItem = function (k) {
+            return Math.sin(Math.PI/N_POINT*2*k)*YMAX;
+        }
+
+        var option = {
+            title: {
+                text: 'Awesome Chart'
+            },
+            tooltip:{
+                show:true
+            },
+            xAxis: {
+                
+            },
+            yAxis: {},
+            series: [{
+                type: 'custom',
+                name:'customtest',
+                itemStyle:{
+                    opacity:1
+                },
+                emphasis:{
+                    itemStyle:{
+                        opacity:0.5
+                    }
+                },
+                data:[
+                    [10,10,20,20,"#ff0000","name1"],
+                    [50,70,70,90,"#00ff00","name2"],
+                    [10,70,20,75,"#00ff00","name2"]
+                ],
+                encode:{
+                    x:[0,2],
+                    y:[1,3],
+                    seriesName:[4]
+                },
+                renderItem:function(params, api){
+                    var p1 = api.coord([api.value(0),api.value(1)])
+                    var p2 = api.coord([api.value(2),api.value(3)])
+                    return {
+                        type: 'polygon',
+                        shape: {
+                            points:[
+                                [p1[0],p1[1]],
+                                [p1[0],p2[1]],
+                                [p2[0],p2[1]],
+                                [p2[0],p1[1]]
+                            ]
+                        },
+                        style:api.style(),//{fill:api.value(4),opacity:0.8},
+                        styleEmphasis:api.styleEmphasis()//{opacity:1}
+                    }
+                }
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+        
+        var cache = {}
+        myChart.on('click', {seriesName: 'customtest'}, function (params) {
+            var isHighLight = cache[params.data[5]];
+            
+            this.dispatchAction({
+                type: 'downplay',
+                seriesIndex: params.seriesIndex
+            })
+            this.dispatchAction({
+                type: isHighLight?'downplay':'highlight',
+                seriesIndex: params.seriesIndex,
+                dataIndex: params.dataIndex
+            })
+            
+            cache[params.data[5]] = !isHighLight;
+            return;
+            var opt = this.getOption();
+            opt.series[params.seriesIndex].data[params.dataIndex][4]="#00ffff";
+            this.setOption(opt);
+            //alert(1);
+            // series name 为 'uuu' 的系列中的图形元素被 'mouseover' 时，此方法被回调。
+        });
+    </script>
+</body>
+</html>

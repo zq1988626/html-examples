@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" z-ui z-ui-single>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"></div>
+    <title>Document</title>
+    <style>
+        .numberbox{
+            display:inline-block;font-size:24px;position: relative;border:1px solid #ccc;
+            height: 31px;
+        }
+        .numberbox > div{
+            -webkit-writing-mode: horizontal-tb !important;
+            text-rendering: auto;
+            color: initial;
+            letter-spacing: normal;
+            word-spacing: normal;
+            text-transform: none;
+            text-indent: 0px;
+            text-shadow: none;
+            display: inline-block;
+            text-align: start;
+            -webkit-appearance: textfield;
+            background-color: white;
+            -webkit-rtl-ordering: logical;
+            cursor: text;
+            margin: 0em;
+            font: 400 13.3333px Arial;
+            font-style: normal;
+            font-variant-ligatures: normal;
+            font-variant-caps: normal;
+            font-variant-numeric: normal;
+            font-variant-east-asian: normal;
+            font-weight: 400;
+            font-stretch: normal;
+            font-size: 13.3333px;
+            line-height: normal;
+            font-family: Arial;
+            padding: 1px 0px;
+            border-width: 2px;
+            border-style: inset;
+            border-color: initial;
+            border-image: initial;
+            font-size: inherit;
+            padding:1px 0px;
+            border: 0px;
+            position: absolute;left:0;top:0;bottom:0;right:0; z-index: -1;
+        }
+        .numberbox > input{
+            vertical-align: top;
+            padding:0px;
+            border: 0px;
+            color:#f000;caret-color: #000;font-size: inherit;background-color: transparent;
+            height:100%;
+        }
+
+        .ele_input{
+            -webkit-writing-mode: horizontal-tb !important;
+            text-rendering: auto;
+            color: initial;
+            letter-spacing: normal;
+            word-spacing: normal;
+            text-transform: none;
+            text-indent: 0px;
+            text-shadow: none;
+            display: inline-block;
+            text-align: start;
+            -webkit-appearance: textfield;
+            background-color: white;
+            -webkit-rtl-ordering: logical;
+            cursor: text;
+            margin: 0em;
+            font: 400 13.3333px Arial;
+            padding: 1px 0px;
+            border-width: 2px;
+            border-style: inset;
+            border-color: initial;
+            border-image: initial;
+            width: 169px;
+            white-space: nowrap;
+            overflow: auto;
+        }
+        .ele_input:focus {
+            outline-offset: -2px;
+        }
+        .ele_input::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="numberbox">
+        <div id="inputbox_show" class="numberbox-showbox">222</div>
+        <input class="numberbox-editbox" id="inputbox" contenteditable="true"/>
+    </div>
+    
+    <br/>
+
+    <ul id="console"></ul>
+    <script src="/lib/jquery/jquery-1.12.4.js"></script>
+    <script>
+        "use strict";
+        (function () {
+            var logbox = $("#console");
+            var inputbox = $("#inputbox");
+            var inputbox_show = $("#inputbox_show");
+            $(function () {
+                inputbox[0].addEventListener("keydown", function (event) {
+                    log("keyCode:" + event.keyCode + " key:" + event.key);
+                    if (event.keyCode != 16) {
+                        var a = 1;
+                    }
+                    var text = inputbox.val();
+                    if (typeof text == "number" || text) {
+                        inputbox_show.text(text.toString());
+                    }
+                    else {
+                        inputbox_show.text("");
+                    }
+                });
+                inputbox[0].addEventListener("keyup", function (event) {
+                    log("keyup");
+                });
+            });
+            var log = function (msg) {
+                logbox.prepend($("<li>" + msg + "</li>"));
+            };
+        })();
+    </script>
+</body>
+</html>

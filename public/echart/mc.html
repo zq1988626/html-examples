@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>煤场ECharts原型</title>
+</head>
+<body>
+    <div id="main" style="width: 600px;height:400px;"></div>
+    <div id="main2" style="width: 600px;height:400px;"></div>
+    <script src="/lib/echart/4.2.1/echarts.js"></script>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        // 基于准备好的dom，初始化echarts实例
+        var myChart2 = echarts.init(document.getElementById('main2'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '煤场控件原型展示'
+            },
+            tooltip: {},
+            legend: {
+                data:['销量']
+            },
+            xAxis: {
+                min:0,
+                max:100
+            },
+            yAxis: {
+                min:0,
+                max:10
+            },
+            series: [
+                {
+                    z:1,
+                    type: 'custom',
+                    tooltip:{
+                        formatter:function(arg){
+                            return `${arg.seriesName}-${arg.data.toString()}`
+                            /* arg {
+                                componentType: 'series',
+                                seriesType: string,// 系列类型
+                                seriesIndex: number,// 系列在传入的 option.series 中的 index
+                                seriesName: string,// 系列名称
+                                name: string,// 数据名，类目名
+                                dataIndex: number,// 数据在传入的 data 数组中的 index
+                                data: Object,// 传入的原始数据项
+                                value: number|Array,// 传入的数据值
+                                color: string,// 数据图形的颜色
+                                percent: number,// 饼图的百分比
+
+                            }*/
+                        }
+                    },
+                    renderItem: function(params, api){
+                        var h = params.coordSys.height;
+                        var x1 = api.value(1)
+                        var x2 = api.value(2)
+                        var text = api.value(3)
+
+                        var p_txt = api.coord([(x1+x2)/2, 0]);
+
+                        var p1 = api.coord([x1, 0]);
+                        var p2 = api.coord([x2, 0]);
+                        var p3 = [p2[0],p2[1]-h];
+                        var p4 = [p1[0],p1[1]-h];
+                        
+                        return {
+                            type:"group",
+                            children:[
+                                {
+                                    type: 'text',
+                                    style:{
+                                        text:text,
+                                        x:p_txt[0],
+                                        y:p_txt[1]+25,
+                                        textAlign:"center",
+                                        font:'12px "microsoft yahei", sans-serif'
+                                    }
+                                },{
+                                    type: 'polygon',
+                                    shape: {
+                                        points:[p1,p2,p3,p4]
+                                    }
+                                    ,style: api.style()
+                                    ,styleEmphasis:api.styleEmphasis()
+                                }
+                            ]
+                        }
+                    },
+                    itemStyle: {
+                        color:"#ff0000",
+                        opacity: 0.1
+                    },
+                    emphasis:{
+                        itemStyle: {
+                            opacity: 0.3
+                        }
+                    },
+                    encode: {
+                        x: [1, 2],
+                        seriesName: [3],
+                        tooltip: [3, 1, 2]
+                        //,y: 0
+                    },
+                    data: [
+                        [10,0,10,"分区1"],
+                        [10,10,20,"分区2"],
+                        [10,20,30,"分区3"],
+                        [10,30,100,"分区4"]
+                    ]
+                },{
+                    z:2,
+                    //煤堆
+                    type: 'custom',
+                    encode: {
+                        y: 2
+                    },
+                    tooltip:{
+                        formatter:function(arg){
+                            return `${arg.seriesName}-${arg.data.toString()}`
+                        }
+                    },
+                    data: [
+                        [
+                            [0,0,0,0,0,0,0,0,0,0],
+                            [0,1,1,2,1,3,0,0,0,0],
+                            3,//y最大值
+                            "煤堆1",
+                            "#ff0000"
+                        ],
+                        [
+                            [0,1,1,2,1,3,0,0,0,0],
+                            [0,1,3,4,3,3,2,0,0,0],
+                            3,//y最大值
+                            "煤堆2",
+                            "#ffff00"
+                        ]
+                    ],
+                    renderItem:function(params, api){
+                        var xstep = 1;
+                        var si = option.series[params.seriesIndex];
+                        var sidata = si.data[params.dataIndex];
+                        var color = sidata[4]
+
+                        var p3s = sidata.slice(0,2).map(function(item){
+                            return item.map(function(data,j){
+                                var data = data;
+                                var prev = (j>=1?item[j-1]:0)||0;
+                                var next =  item[j+1]||0;
+                                if(data==0){prev = next = 0;}
+                                var prevM = prev==0?0:((prev+data)/2)
+                                var nextM = next==0?0:((next+data)/2)
+                                return [prevM,data,nextM];
+                            })
+                        })
+
+                        var topData = p3s[0];
+                        var bottomData = p3s[1];
+
+                        var rowdata = topData.map(function(item,i){
+                            var currRow = item;
+                            var prevRow = bottomData[i]
+                            var x = i*xstep+xstep/2;
+                            var prevx = x-xstep/2;
+                            var nextx = x+xstep/2;
+                            return [
+                                [prevx,currRow[0]],
+                                [x,currRow[1]],
+                                [nextx,currRow[2]],
+                                [nextx,prevRow[2]],
+                                [x,prevRow[1]],
+                                [prevx,prevRow[0]]
+                            ]
+                        })
+
+                        var lineTop = [],lineBottom=[];
+                        var zero = api.coord([0,0]);
+                        for(var i = 0;i<rowdata.length;i++){
+                            var points =rowdata[i].map(function(d){
+                                return api.coord(d);
+                            });
+                            lineTop = lineTop.concat(points.slice(0,3));
+                            lineBottom = lineBottom.concat(points.slice(-3).reverse());
+                        }
+
+                        lineBottom = lineBottom.reverse();
+                        var newTopLine = [lineTop[0]];
+                        var newBottomLine = [lineBottom[0]];
+                        
+                        for(var i=1;i<lineTop.length;i++){
+                            if(
+                                lineTop[i][0] == lineTop[i-1][0]
+                                &&lineTop[i][1] == lineTop[i-1][1]
+                            ){continue;}
+                            newTopLine.push(lineTop[i]);
+                        }
+
+                        for(var i=1;i<lineBottom.length;i++){
+                            if(
+                                lineBottom[i][0] == lineBottom[i-1][0]
+                                &&lineBottom[i][1] == lineBottom[i-1][1]
+                            ){continue;}
+                            newBottomLine.push(lineBottom[i]);
+                        }
+
+                        return {
+                            type:"group",
+                            children:[{
+                                type: 'polygon',
+                                shape: {
+                                    points:newTopLine.concat(newBottomLine)
+                                },
+                                style:{fill:color,opacity:0.8},
+                                styleEmphasis:{fill:color,opacity:1}
+                            }]
+                        };
+                    }
+                }
+            ]
+        };
+        
+        //获取X轴偏移量
+        var getOffsetW = function(y,bh,xv,minxv){
+            var rev;
+            if(rev == undefined&&y>=bh){rev = 0;}
+            if(rev == undefined){
+                rev=(xv-minxv)/2 - y/bh*(xv-minxv)/2;
+            }
+            return rev;
+        }
+
+        var option2 = {
+            title: {
+                text: '煤场控件原型展示-筒仓'
+            },
+            tooltip: {},
+            legend: {
+                data:['销量']
+            },
+            xAxis: {
+                min:0,
+                max:20,
+                offset:20,
+                axisLabel:{show:false},
+                splitLine:{show:false},
+                axisTick:{show:false,length:20},
+                axisLine:{show:false}
+            },
+            yAxis: {
+                min:0,
+                max:10,
+                offset:20,
+                splitLine:{show:false},
+                axisTick:{show:true,length:20},
+                axisLine:{show:false}
+            },
+            series: [
+                {
+                    z:1,
+                    type: 'custom',
+                    name:"容器",
+                    itemStyle:{color:"#eeeeee",opacity: 1,borderWidth:4,borderColor:"#cccccc"},
+                    emphasis:{itemStyle: {color:"#cccccc",opacity: 1,borderWidth:4,borderColor:"#000000"}},
+                    encode: {
+                        x:[0],
+                        y:[1],
+                        seriesName: [2]
+                    },
+                    data:[[20,10,"原煤仓"]],
+                    renderItem: function(params, api){
+                        var xv = 20;
+                        var bh = 2;
+                        var minxv = 10;
+                        var offset = getOffsetW(0,bh,xv,minxv);
+                        var x1 =0,x2=xv,y1=0,y2=10;
+                        var ps = [
+                            [x1+offset,0],[0,2],[0, y2],
+                            [x2,y2],[x2,2],[x2-offset,y1]
+                        ].map(api.coord);
+                        //ps.forEach((item,i)=>item[0])
+                        var style = api.style()
+                        return {
+                            type: 'polygon',
+                            shape: {
+                                points:ps
+                            }
+                            ,style:api.style()
+                            ,styleEmphasis:api.styleEmphasis()
+                        }
+                    }
+                },
+                {
+                    z:2,
+                    type: 'custom',
+                    tooltip:{
+                        formatter:function(arg){
+                            return `${arg.seriesName}-${arg.data.toString()}`
+                        }
+                    },
+                    name:"筒仓",
+                    itemStyle: {
+                        color:"#000000",
+                        opacity: 0.5
+                    },
+                    emphasis:{
+                        itemStyle: {
+                            color:"#00ff00",
+                            opacity: 0.3
+                        }
+                    },
+                    encode: {
+                        x:[0],
+                        y: [1, 2],
+                        seriesName: [3,4]
+                    },
+                    data: [
+                        [20,0,1.5,"分区1","#ff0000"],
+                        [20,1.5,4,"分区2","#00ff00"],
+                        [20,4,8,"分区3","#0000ff"],
+                        [20,8,9,"分区4","#ffff00"]
+                    ],
+                    renderItem: function(params, api){
+                        var xv = 20;
+                        var bh = 2;
+                        var minxv = 10;
+
+                        var y1 = api.value(1);
+                        var y2 = api.value(2);
+                        var x1 = 0;
+                        var x2 = xv;
+                        var offsetx1 = getOffsetW(y1,bh,xv,minxv);
+                        var offsetx2 = getOffsetW(y2,bh,xv,minxv);
+                        var text = api.value(3);
+                        var color = api.value(4);
+                        var p_txt = api.coord([xv, (y1+y2)/2]);
+                        p_txt[1]-=7;
+
+                        var ps;
+                        if(y1<2&&y2>2){
+                            ps = [[x1+offsetx1, y1],[0,2],[x1+offsetx2, y2],[x2-offsetx2,y2],[x2,2],[x2-offsetx1,y1]].map(api.coord);
+                        }else{
+                            ps = [[x1+offsetx1, y1],[x1+offsetx2, y2],[x2-offsetx2,y2],[x2-offsetx1,y1]].map(api.coord);
+                        }
+
+                        
+                        return {
+                            type:"group",
+                            children:[
+                                {
+                                    type: 'text',
+                                    style:{
+                                        opacity:0.3,
+                                        text:text,
+                                        x:p_txt[0]+25,
+                                        y:p_txt[1],
+                                        textAlign:"center",
+                                        font:'12px "microsoft yahei", sans-serif'
+                                    }
+                                    ,styleEmphasis:{opacity:1}
+                                },{
+                                    type: 'polygon',
+                                    shape: {
+                                        points:ps
+                                    }
+                                    ,style: Object.assign({},api.style(),{fill:color,opacity:0.3})
+                                    ,styleEmphasis: Object.assign({},api.styleEmphasis(),{fill:color,opacity:0.6})
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+        myChart2.setOption(option2);
+    </script>
+</body>
+</html>

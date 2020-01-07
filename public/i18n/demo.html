@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="/lib/vue/vue.js"></script>
+    <script src="/lib/intl-messageformat/intl-messageformat.js"></script>
+</head>
+<body>
+	<div id="app">
+        <div>
+            <select v-model="lang">
+                <option :value="item.code" v-for="item in langs">{{item.title}}</option>
+            </select>
+        </div>
+        <div>消息：{{msg}}</div>
+        数据：<input v-model="count" type="number" value="0" />
+    </div>
+    <script>
+        var MESSAGES = {
+            'en-US': {
+                NUM_PHOTOS: 'You have {numPhotos, plural, ' +
+                    '=0 {no photos.}' +
+                    '=1 {one photo.}' +
+                    'other {# photos.}}'
+            },
+            'es-MX': {
+                NUM_PHOTOS: 'Usted {numPhotos, plural, ' +
+                    '=0 {no tiene fotos.}' +
+                    '=1 {tiene una foto.}' +
+                    'other {tiene # fotos.}}'
+            },
+            'zh-CN':{
+                NUM_PHOTOS: '你{numPhotos,plural,=0{没有照片。}=1{有一张照片}other{有 # 张照片。}}'
+            }
+        };
+        new Vue({
+            el:"#app",
+            data:{
+                count:0,
+                lang:"zh-CN",
+                langs:[
+                    {code:"zh-CN",title:"中文简体"},
+                    {code:"en-US",title:"英语（美国）"},
+                    {code:"es-MX",title:"西班牙语（墨西哥）"}
+                ]
+            },
+            computed:{
+                msg:function(){
+                    var esNumPhotos = new IntlMessageFormat(MESSAGES[this.lang].NUM_PHOTOS, this.lang);
+                    return esNumPhotos.format({numPhotos: this.count});
+                }
+            },
+            created:function(){
+                this.out = 222;
+            },
+            methods:{
+                update:function(){
+                    this.out = _.template(
+                        this.source,
+                        {interpolate : /{{([\s\S]+?)}}/g}
+                    )(JSON.parse(this.strdata));
+                }
+            }
+        })
+    </script>
+    <script>
+
+        var output;
+
+        var enNumPhotos = new IntlMessageFormat(MESSAGES['en-US'].NUM_PHOTOS, 'en-US');
+        output = enNumPhotos.format({numPhotos: 1000});
+        console.log(output); // => "You have 1,000 photos."
+
+        var esNumPhotos = new IntlMessageFormat(MESSAGES['es-MX'].NUM_PHOTOS, 'es-MX');
+        output = esNumPhotos.format({numPhotos: 1000});
+        console.log(output); // => "Usted tiene 1,000 fotos."  
+
+        var esNumPhotos = new IntlMessageFormat(MESSAGES['zh-CN'].NUM_PHOTOS, 'zh-CN');
+        output = esNumPhotos.format({numPhotos: 1000});
+        console.log(output); // => "Usted tiene 1,000 fotos."  
+    </script>
+</body>
+</html>

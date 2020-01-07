@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="single-page">
+<head>
+    <style>
+        html.single-page{height: 100%;}
+        html.single-page body{height: 100%;margin:0;}
+        textarea{width:100%;height:100%;box-sizing: border-box;resize: none;background: #000;color:#fff;border: 0;}
+    </style>
+</head>
+<body>
+    <div id="app" style="height:100%;">
+        <textarea v-model="outlog"></textarea>
+    </div>
+    <script src="https://cdn.bootcss.com/rxjs/6.5.3/rxjs.umd.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script>
+        /* 这部分代码不用看 */
+        var v = new Vue({
+            el:"#app",
+            data(){
+                return {
+                    log:[],
+                    datetime:new Date()
+                }
+            },
+            computed:{
+                outlog(){return this.log.join("\n")}
+            }
+        })
+        var starttime = Date.now()
+        console.log = function(msg){
+            v.log.push('['+ (Date.now()-starttime) +'] '+msg);
+        }
+    </script>
+    <script>
+        const observable = new rxjs.Observable(subscriber => {
+            subscriber.next(1);
+            subscriber.next(2);
+            subscriber.next(3);
+            setTimeout(() => {
+                subscriber.next(4);
+                setTimeout(() => {
+                    subscriber.next(5);
+                    setTimeout(() => {
+                        subscriber.next(5);
+                        //完成
+                        subscriber.complete();
+                    }, 1000);
+                }, 1000);
+            }, 1000);
+            setTimeout(() => {
+                subscriber.next(5);
+            }, 1000);
+        });
+
+        console.log('订阅之前输出');
+        observable.subscribe({
+            next(x) { console.log('获取到值 ' + x); },
+            error(err) { console.error('获取到异常: ' + err); },
+            complete() { console.log('完成'); }
+        });
+        console.log('订阅之后输出');
+
+        setTimeout(function(){
+            console.log('用户2 订阅之前输出');
+            var subscription = observable.subscribe({
+                next(x) { console.log('用户2 获取到值 ' + x); },
+                error(err) { console.error('用户2 获取到异常: ' + err); },
+                complete() { console.log('用户2 完成'); }
+            });
+            console.log('用户2 订阅之后输出');
+            subscription.unsubscribe();
+            console.log('用户2 取消订阅之后输出');
+        },2000);
+
+        //清除
+        const observable2 = new rxjs.Observable(function subscribe(subscriber) {
+            // Keep track of the interval resource
+            const intervalId = setInterval(() => {
+                subscriber.next('hi' + Date.now());
+            }, 1000);
+
+            // Provide a way of canceling and disposing the interval resource
+            return function unsubscribe() {
+                console.log("执行 clearInterval");
+                clearInterval(intervalId);
+            };
+        });
+        const unsubscribe2 = observable2.subscribe({
+            next(x){console.log("用户2-1 "+x);}
+        })
+        setTimeout(_=>{
+            unsubscribe2.unsubscribe()
+            const unsubscribe3 = observable2.subscribe({
+                next(x){console.log("用户2-2 "+x);}
+            })
+            setTimeout(_=>unsubscribe3.unsubscribe(),4000)
+            
+        },10000)
+
+        var observable3 = rxjs.operators
+        .map(x=>x*x)(rxjs.of(1,2,3,4))
+        .subscribe((v) => console.log(`map value: ${v}`));
+
+        
+        rxjs.operators.first()(rxjs.of(1, 2, 3))
+        .subscribe({
+            next(v){console.log(`first value: ${v}`)}
+        });
+ 
+        const observable41 = rxjs.interval(400);
+        const observable42 = rxjs.interval(300);
+        
+        const subscription40 = observable41.subscribe(x => console.log('first: ' + x));
+        const childSubscription41 = observable42.subscribe(x => console.log('second: ' + x));
+        
+        subscription40.add(childSubscription41);
+        
+        setTimeout(() => {
+            // Unsubscribes BOTH subscription and childSubscription
+            subscription40.unsubscribe();
+        }, 5000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Document</title>
+</head>
+<body>
+    <div id="log"></div>
+    <script src="/lib/rxjs/rx.all.js"></script>
+    <script src="http://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+    <script>
+        var log = function(s){
+            $("#log").append("<div>"+s+"</div>")
+        }
+
+        $(function(){
+            const observable2 = Rx.Observable.create((observe) => {
+                observe.next('value')
+            });
+            observable2.subscribe(function(v){
+                console.log("observable2:"+v);
+            })
+
+            var observable = Rx.Observable
+            // 通过create方法创建一个Observable
+            // 回调函数会接受observer参数，也就是观察者角色
+                .create(function(observer) {
+                    observer.next('hi');
+                    observer.next('world');
+                    setTimeout(() => {
+                        observer.next('这一段是异步操作');
+                    }, 1000)
+                    setTimeout(() => {
+                        observer.next('这一段是异步操作');
+                    }, 2000)
+                    setTimeout(() => {
+                        observer.next('这一段是异步操作');
+                    }, 3000)
+                })
+
+            // 订阅这个 observable
+            // 只有在订阅之后，才会在流Observable变化的时候，调用observer提供的方法，并通知他	
+            // 订阅之后也可以取消订阅，调用unsubscribe()即可
+
+            log("订阅1:开始订阅");
+            var subscription = observable.subscribe(function(value) {
+                log("订阅1:"+value);
+            })
+            setTimeout(()=> {
+                subscription.dispose()
+                log("订阅1:取消订阅");
+            }, 5000)
+
+            window.setTimeout(function(){
+                log("订阅2:开始订阅");
+                var subscription2 = observable.subscribe(function(value) {
+                    log("订阅2:"+value);
+                })
+                setTimeout(()=> {
+                    subscription2.dispose()
+                    log("订阅2:取消订阅");
+                }, 5000)
+            },1000)
+
+        })
+    </script>
+</body>
+</html>

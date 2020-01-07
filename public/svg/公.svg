@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 113.79 113.67">
+<defs>
+<style>
+.cls-1{font-size:10px;}
+.cls-1,.cls-2,
+.cls-4{fill:#e7211a;}
+.cls-1,.cls-2{font-family:AdobeSongStd-Light-GBpc-EUC-H, SimSun;}
+.cls-2{font-size:28px;}
+.cls-3{fill:none;stroke:#e7211a;stroke-miterlimit:10;stroke-width:0.6mm;}
+</style>
+</defs>
+<title>公章效果</title>
+<g id="图层_2" data-name="图层 2">
+<g id="图层_1-2" data-name="图层 1">
+    <text class="cls-1" transform="translate(24.12 93.95) rotate(38.64)">4</text>
+    <text class="cls-1" transform="translate(28.46 97.36) rotate(32.28)">2</text>
+    <text class="cls-1" transform="translate(33.16 100.26) rotate(25.89)">0</text>
+    <text class="cls-1" transform="translate(38.16 102.64) rotate(19.47)">1</text>
+    <text class="cls-1" transform="translate(43.37 104.43) rotate(13.07)">1</text>
+    <text class="cls-1" transform="translate(48.75 105.62) rotate(6.69)">9</text>
+    <text class="cls-1" transform="translate(54.2 106.2) rotate(0.93)">0</text>
+    <text class="cls-1" transform="matrix(1, -0.1, 0.1, 0.99, 59.75, 106.21)">1</text>
+    <text class="cls-1" transform="translate(65.24 105.59) rotate(-12.26)">6</text>
+    <text class="cls-1" transform="translate(70.62 104.37) rotate(-18.67)">5</text>
+    <text class="cls-1" transform="matrix(0.91, -0.42, 0.42, 0.91, 75.83, 102.56)">1</text>
+    <text class="cls-1" transform="translate(80.81 100.17) rotate(-31.46)">1</text>
+    <text class="cls-1" transform="translate(85.49 97.25) rotate(-37.83)">5</text>
+    <text class="cls-2" transform="matrix(-0.23, -0.36, 0.66, -0.42, 33.39, 78.69)">武</text>
+    <text class="cls-2" transform="translate(26.38 67.16) rotate(-98.23) scale(0.43 0.78)">汉</text>
+    <text class="cls-2" transform="translate(24.76 53.8) rotate(-73.99) scale(0.43 0.78)">博</text>
+    <text class="cls-2" transform="translate(28.77 40.95) rotate(-49.69) scale(0.43 0.78)">纳</text>
+    <text class="cls-2" transform="translate(37.73 30.86) rotate(-25.63) scale(0.43 0.78)">瑞</text>
+    <text class="cls-2" transform="translate(49.99 25.29) rotate(-1.27) scale(0.43 0.78)">科</text>
+    <text class="cls-2" transform="translate(63.5 25.25) rotate(22.47) scale(0.43 0.78)">技</text>
+    <text class="cls-2" transform="matrix(0.3, 0.31, -0.57, 0.54, 75.84, 30.7)">有</text>
+    <text class="cls-2" transform="matrix(0.14, 0.41, -0.74, 0.26, 84.88, 40.69)">限</text>
+    <text class="cls-2" transform="translate(89.02 53.48) rotate(95.22) scale(0.43 0.78)">公</text>
+    <text class="cls-2" transform="matrix(-0.21, 0.37, -0.68, -0.38, 87.51, 66.89)">司</text>
+    <ellipse class="cls-3" cx="56.9" cy="56.83" rx="55.23" ry="55.17"/>
+    <polygon class="cls-4" points="67.33 71.74 55.98 63.94 45.03 72.3 48.96 59.12 37.61 51.31 51.39 50.97 55.32 37.79 59.91 50.76 73.69 50.41 62.74 58.77 67.33 71.74"/>
+</g>
+</g>
+</svg>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!--1. 引入 bootstrap-->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/2.0.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"></script>
+    <style type="text/css">
+        /*<!--代表已经完成的项目-->*/
+        .del {
+            text-decoration: line-through;
+            color: #ccc;
+        }
+    </style>
+
+</head>
+<body>
+<!--2. 导航-->
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                Vuejs_TODO
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!--pannel-->
+<div class="container" id="app">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-success">
+
+                <div class="panel-heading">
+                    <h3 class="text-danger">-_-, 还有 {{ unDoDataTotal }} 件事未完成</h3>
+                    <!--确保用户按下回车的时候，进行存储 监控回车按键-->
+                    <!--按键修饰符: 13这个是回车键的键码，代表用户按下了回车键-->
+                    <!--收集数据时候也可以使用修饰符-->
+                    <input type="text" v-model.trim="title" @change.13="changeHandler" class="form-control">
+                </div>
+
+                <div class="panel-body">
+
+                    <ul class="list-group">
+
+                        <!--注意：在写模型变量的时候，单词的大小写，还有顺序不要写错-->
+                        <!--能复制不要手写-->
+                        <!--todos  toods  tods-->
+                        <!--展示筛选后的数据-->
+                        <li class="list-group-item" :class="{del: todo.isCompleted}" v-for="todo in newTodos">
+                            <input type="checkbox" v-model="todo.isCompleted"> {{ todo.title }}
+                            <button type="button" class="btn btn-danger btn-xs pull-right"
+                                    @click="removeItemHandler(todo)">&times;
+                            </button>
+                        </li>
+
+                    </ul>
+
+                </div>
+                <div class="panel-footer">
+                    <!--要实现筛选功能：前台是要监控得到用户点击的是哪个筛选条件：可以使用到 window.onhashchange 这个事件, 当页面的锚点发生变化的时候，触发-->
+                    <ul class="nav nav-pills">
+                        <li :class="{active: hash =='#/all'}"><a href="#/all">全部</a></li>
+                        <li :class="{active: hash =='#/finish'}"><a href="#/finish">已完成</a></li>
+                        <li :class="{active: hash =='#/unfinish'}"><a href="#/unfinish">未完成</a></li>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            hash: '#/all', // 默认全部选中
+            title: '',
+            todoskey: 'keys',
+
+            todos: [
+                {
+                    id: 1,
+                    title: '睡觉',
+                    isCompleted: false,
+                },
+                {
+                    id: 2,
+                    title: '吃饭',
+                    isCompleted: true,
+                },
+                {
+                    id: 3,
+                    title: '打豆豆',
+                    isCompleted: false,
+                },
+            ],
+            //  在 使用 watch 的时候，存在一个监视的层级问题：默认是浅检测，只会监视模型变量的第一层的变化 开启深度检测
+            newTodos: [],
+
+        },
+        // 页面一加载，函数自动触发
+        created: function () {
+
+            var key = 'todosKey';
+
+            this.todos = localStorage.getItem(key) ? JSON.parse( localStorage.getItem(key) ): [];
+
+            window.addEventListener('hashchange', () => {
+                console.log(location.hash);
+                this.hash = location.hash;
+            }, false);
+
+        },
+        methods: {
+            generaterId: function () {
+                window.currentid = window.currentid||0;
+                return window.currentid++;
+            },
+            changeHandler: function () {
+
+                if (this.title.length <= 0) {
+                    alert('请填写待做事情！');
+                    return;
+                }
+
+                this.todos.push({
+                    id: this.generaterId(),
+                    title: this.title,
+                    isCompleted: false,
+                });
+
+                this.title = '';// 清空
+            },
+            removeItemHandler: function (todo) {
+                this.todos = this.todos.filter((item) => {
+                    return item !== todo;
+                    // 当前如果不等于传过来的待删除的条目，则保留
+                });
+
+            }
+        },
+        // 展示待做项
+        computed: {
+            unDoDataTotal: function () {
+                // 返回还没有完成的事情 isCompleted： false
+                return this.newTodos.filter((item) => {
+                    return !item.isCompleted;
+                }).length;
+            },
+
+
+        },
+        watch: {
+            hash: function (newVal, oldVal) {
+                if (newVal === '#/finish') {
+                    this.newTodos = this.todos.filter((item) => {
+                        return item.isCompleted;
+                    })
+
+                } else if (newVal === '#/unfinish') {
+
+                    this.newTodos = this.todos.filter((item) => {
+                        return !item.isCompleted;
+                    })
+                } else {
+                    // 代表默认的操作，全部的数据
+                    this.newTodos = this.todos;
+                }
+
+            },
+            todos: {
+                handler: function () {
+                    var key = 'todosKey';
+                    console.log('this', this);
+                    // 自己定义的模型变量不能使用下划线（vuejs默认会认为是私有属性）
+                    // vuejs 里面特性 set get
+                    console.log('this.todoskey', this.todoskey);
+                    localStorage.setItem(key, JSON.stringify(  this.todos  ));
+                    this.newTodos = this.todos;
+                },
+                deep: true,
+            },
+        }
+    })
+</script>
+</html>

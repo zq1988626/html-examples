@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+    <style>
+        input[type=number]{width:60px;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <a ref="downloadele"></a>
+        <button @click="download">下载</button>
+
+        <div>
+            边宽：<input type="number" v-model.number="border">
+        </div>
+        <table>
+            <thead>
+                <tr><th>项目</th><th>文本</th><th>大小</th><th>半径</th><th>开始</th><th>截止</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>名称：</td><td><input v-model="name" /></td>
+                    <td><input type="number" v-model.number="namesize"></td>
+                    <td><input type="number" v-model.number="namer"></td>
+                    <td><input type="number" v-model.number="namerotate_s"></td>
+                    <td><input type="number" v-model.number="namerotate_e"></td>
+                </tr>
+                <tr>
+                    <td>编号：</td><td><input v-model="number" /></td>
+                    <td><input type="number" v-model.number="numbersize"></td>
+                    <td><input type="number" v-model.number="numberr"></td>
+                    <td><input type="number" v-model.number="numberrotate_s"></td>
+                    <td><input type="number" v-model.number="numberrotate_e"></td>
+                </tr>
+                <tr>
+                    <td>sub：</td><td><input v-model="subtext" /></td>
+                    <td><input type="number" v-model.number="subtextsize"></td>
+                    <td>-</td>
+                    <td><input type="number" v-model.number="subtext_y"></td>
+                    <td>-</td>
+                </tr>
+            </tbody>
+        </table>
+
+        
+        <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 114 114">
+            <g style="fill:#e7211a;font-family:SimSun;">
+                <g transform="translate(57 57)" :style="{fontSize:numbersize+'px'}">
+                    <g :transform="'rotate('+item.rotate+')'" v-for="item in numberlist"><text :transform="'translate(-4 '+numberr+')'">{{item.value}}</text></g>
+                </g>
+                <g transform="translate(57 57)" :style="{fontSize:namesize+'px'}">
+                    <g :transform="'rotate('+item.rotate+')'" v-for="item in namelist"><text :transform="'translate(-8 '+namer+') scale(0.43 0.78)'">{{item.value}}</text></g>
+                </g>
+                <g transform="translate(57 57)" :style="{fontSize:subtextsize+'px'}">
+                    <text style="text-anchor: middle;" :transform="'translate(0,'+subtext_y+') scale(0.5 0.8)'">{{subtext}}</text>
+                </g>
+                <circle :style="{strokeWidth:border+'px'}" cx="57" cy="56" r="55" style="fill:none;stroke:#e7211a;"/>
+                <polygon style="fill:#e7211a;" points="67.33 71.74 55.98 63.94 45.03 72.3 48.96 59.12 37.61 51.31 51.39 50.97 55.32 37.79 59.91 50.76 73.69 50.41 62.74 58.77 67.33 71.74"/>
+            </g>
+        </svg>
+    </div>
+</body>
+
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            width:400,
+            size:114,
+            border:2,
+            
+            name:"山东无棣齐星高科技钢材有限公司",
+            namesize:28,
+            namerotate_s:-112,
+            namerotate_e:130,
+            namer:-33,
+
+            number:"4201190168115",
+            numbersize:10,
+            numberr:51,
+            numberrotate_s:33,
+            numberrotate_e:-45,
+            svgcode:'',
+
+            subtext:"合同专用章",
+            subtextsize:22,
+            subtext_y:29
+        },
+        computed:{
+            numberlist(){
+                var s = (this.numberrotate_s-this.numberrotate_e)/this.number.length
+                return this.number.split("").map((n,i)=>({value:n,rotate:this.numberrotate_s-s*i}))
+            },
+            namelist(){
+                var s = (this.namerotate_s-this.namerotate_e)/this.name.length
+                return this.name.split("").map((n,i)=>({value:n,rotate:this.namerotate_s-s*i}))
+            },
+            points(){
+                return "67.33 71.74 55.98 63.94 45.03 72.3 48.96 59.12 37.61 51.31 51.39 50.97 55.32 37.79 59.91 50.76 73.69 50.41 62.74 58.77 67.33 71.74"
+                .split(" ").map((n,i)=>n-(i%2?56:56)).join(" ")
+            },
+            namehtml(){
+                return this.name;//.split("").map(item=>`<text>${item}</text>`).join("")
+            },
+            r(){
+                return this.width/2-this.border/2
+            },
+            ellipsePath(){
+                return this.getEllipsePath(this.r);
+            },
+            numberEllipsePath(){
+                return this.getEllipsePath(this.numberr);
+            },
+            nameEllipsePath(){
+                return this.getEllipsePathR(this.namer);
+            },
+            wjx(){
+                var radius = 130;
+                var angle = 2 * Math.M_PI / 5;
+                var center=[57, 57];
+
+                var NSMutableArray = [];
+                for (var i = 0; i < 10; i++) {
+                    if (i%2 == 0) {
+                        var x = Math.cosf(i/2 * angle - Math.M_PI_2) * radius;
+                        var y = Math.sinf(i/2 * angle - Math.M_PI_2) * radius;
+                        var point = [x+ center.x, y+ center.y];
+                        NSMutableArray.push(point.join(" "))
+                    }else{
+                        var l = radius*(Math.sinf(15/180.0*Math.M_PI_2)/Math.sinf(135/180.0*Math.M_PI));
+                        var x = Math.cosf(i/2 * angle + 1/6.0*Math.M_PI - Math.M_PI_2) * l;
+                        var y = Math.sinf(i/2 * angle + 1/6.0*Math.M_PI - Math.M_PI_2) * l;
+                        var point = [x+ center.x, y+ center.y];
+                        NSMutableArray.push(point.join(" "))
+                    }
+                }
+                return NSMutableArray.join(" ");
+            }
+        },
+        methods:{
+            download(){
+                var code = document.getElementsByTagName("svg")[0].outerHTML;
+                var pom = document.createElement('a');
+                pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(code));
+                pom.setAttribute('download', this.name+".svg");
+                if (document.createEvent) {
+                    var event = document.createEvent('MouseEvents');
+                    event.initEvent('click', true, true);
+                    pom.dispatchEvent(event);
+                }
+                else {
+                    pom.click();
+                }
+            },
+            getEllipsePath(r){
+                return `M 0, 0 m -${r}, 0 a ${r},${r} 0 1,0 ${r*2},0 a ${r},${r} 0 1,0 -${r*2},0`
+            },
+            getEllipsePathR(r){
+                return `M 0, 0 m -${r}, 0 a ${r},${r} 0 1,1 ${r*2},0 a ${r},${r} 0 1,1 -${r*2},0`
+            },
+            onclick:function(){
+                this.list.push(this.value);
+            }
+        }
+    })
+</script>
+</html>
