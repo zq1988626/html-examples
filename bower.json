@@ -1,0 +1,27 @@
+{
+  "name": "html-examples",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "zhuqiang <290353142@qq.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/zq1988626/html-examples",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.12.4",
+    "echarts": "^4.6.0",
+    "requirejs": "^2.3.6",
+    "rxjs": "^4.1.0",
+    "three": "*",
+    "vue": "^2.6.11",
+    "intl-messageformat": "^1.1.0",
+    "react": "^16.1.0"
+  }
+}

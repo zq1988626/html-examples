@@ -1,4 +1,13 @@
 {
+  "name": "html-examples",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/zq1988626/html-examples.git",
+  "author": "zhuqiang <290353142@qq.com>",
+  "license": "MIT",
+  "scripts": {
+    "init":"yarn install & "
+  },
   "dependencies": {
     "express": "^4.17.1"
   }
