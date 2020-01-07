@@ -1,3 +1,14 @@
 # HTML-Examples
 
-# bower install
+
+## init 
+```
+bower install
+
+yarn install
+```
+
+## start
+```
+npm start
+```

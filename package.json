@@ -6,7 +6,7 @@
   "author": "zhuqiang <290353142@qq.com>",
   "license": "MIT",
   "scripts": {
-    "init":"yarn install & "
+    "start":"node index"
   },
   "dependencies": {
     "express": "^4.17.1"
