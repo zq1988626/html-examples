@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+    <table id="showbox">
+    </table>
+    <script>
+        var dataArr = [
+            ['600155','华创阳安',7.81,1.17,7.72,7.72,7.90,7.68,87597.96,68211973,0.50,2.85,0.79], 
+            ['600599','熊猫金控',10.02,3.73,9.66,9.68,10.36,9.58,15278.46,15386781,0.92,8.07,1.72]
+        ];
+        var indexdataArr = [
+            ['000001','上证指数',2671.89,0.68,2653.90,2654.03,184101179,1567.42,2674.48,2648.83], 
+            ['399001','深证成指',8010.07,1.15,7919.05,7915.06,258799232.35,2084.55,8027.63,7903.90]
+        ];
+        var NewQuoteListPage = {
+            GetData:function(dataArr,indexdataArr){
+                var showbox = $("#showbox").empty();
+                var tbody = $("<tbody></tbody>");
+                dataArr.concat(indexdataArr).forEach(function(item){
+                    var tr = $("<tr></tr>").appendTo(tbody);
+                    item.forEach(function(itemi){
+                        $(`<td>${itemi}</td>`).appendTo(tr)
+                    });
+                });
+                tbody.appendTo(showbox);
+            }
+        };
+
+        $.getScript("http://quote.stock.hexun.com/stockdata/stock_quote.aspx?stocklist=600155|600599&indexlist=000001_1|399001_2");
+    </script>
+</body>
+</html>

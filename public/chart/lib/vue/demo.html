@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body controller="demo.js">
+		<table id="grid" control="controls/vue.treetable" option='{
+			idfield:"myid",
+			pidfield:"mypid",
+			namefield:"myname",
+			multiselect:true,
+			cellEdit:true,
+			 showRowTotals:"top"
+		}'>
+			<thead>
+				<tr>
+					<th>名称</th>
+					<th>煤量</th>
+					<th>热值</th>
+					<th>硫分</th>
+					<th>文本</th>
+					<th>日期</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td option="{name:'myname',width: 200}"></td>
+					<td option="{name:'ml',isinput:true,hjtype:'sum',decimalDigits:3}"></td>
+					<td option="{name:'rz',isinput:true,hjtype:'jqpj',hjkey:'ml',decimalDigits:3}"></td>
+					<td option="{name:'lf',isinput:true,hjtype:'jqpj',hjkey:'ml',decimalDigits:3}"></td>
+					<td option="{name:'sl',isinput:true,inputtype:'text',decimalDigits:3}"></td>
+					<td option="{name:'date',isinput:true,inputtype:'date',decimalDigits:3}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+	<script src="/com.kysoft.service/resource/core/js/com.kjsoft.core.starter.js"></script>
+</html>

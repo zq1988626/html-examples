@@ -1,0 +1,117 @@
+<svg id="svg" style="border: 0px solid red;" viewBox="0,0,600,600" width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg">
+	<title>圆型煤场</title>
+	<defs>
+		<filter id="shadow">
+			<feGaussianBlur in="SourceAlpha" stdDeviation="20" result="blur"></feGaussianBlur>
+			<feOffset in="blur" dx="0" dy="0" result="offsetBlur"></feOffset>
+			<feMerge>
+				<feMergeNode in="offsetBlur" />
+				<feMergeNode in="SourceGraphic" />
+			</feMerge>
+		</filter>
+	</defs>
+	<g class="background"></g>
+	
+	<g transform="translate(280 550)" style="fill:#000;font-size:30px;">
+		<g transform="translate(-100 0)">
+			<path id="rect" transform="rotate(180 25 15)" d="M0,10L30,10L30,0L50,15L30,30L30,20L0,20z" class="btn_left">
+			</path>
+		</g>
+		<g transform="translate(100 0)">
+			<path id="rect" d="M0,10L30,10L30,0L50,15L30,30L30,20L0,20z" class="btn_right">
+			</path>
+		</g>
+	</g>	
+	
+	<g transform="translate(250 50)" style="fill:#000;font-size:30px;">
+		<text class="title">#1煤场</text>
+	</g>
+	<g class="kdp" transform="translate(300 400) scale(1 0.35)">
+	<g class="kdptransform" transform="rotate(0 0 0)">
+		<circle style="filter:url(#shadow)" cx="0" cy="0" r="170" stroke="#000" stroke-width="2" fill="rgba(0,0,0,0.9)"  
+		transform="scale(1,1)"></circle>
+		
+		<g style="fill:#fff;font-size:30px;">
+			<text transform="rotate(0 0 0)" x="-8" y="-240" class="kdLabel">0</text>
+			<text transform="rotate(30 0 0)" x="-17" y="-240" class="kdLabel">30</text>
+			<text transform="rotate(60 0 0)" x="-17" y="-240" class="kdLabel">60</text>
+			<text transform="rotate(90 0 0)" x="-17" y="-240" class="kdLabel">90</text>
+			<text transform="rotate(120 0 0)" x="-26" y="-240" class="kdLabel">120</text>
+			<text transform="rotate(150 0 0)" x="-26" y="-240" class="kdLabel">150</text>
+			<text transform="rotate(180 0 0)" x="-26" y="-240" class="kdLabel">180</text>
+			<text transform="rotate(210 0 0)" x="-26" y="-240" class="kdLabel">210</text>
+			<text transform="rotate(240 0 0)" x="-26" y="-240" class="kdLabel">240</text>
+			<text transform="rotate(270 0 0)" x="-26" y="-240" class="kdLabel">270</text>
+			<text transform="rotate(300 0 0)" x="-26" y="-240" class="kdLabel">300</text>
+			<text transform="rotate(330 0 0)" x="-26" y="-240" class="kdLabel">330</text>
+		</g>
+		
+		<g class="kdpLineBox">
+			<line transform="rotate(0 0 0)" y1="-220" y2="-180"></line>
+			<line transform="rotate(10 0 0)" y1="-200" y2="-180"></line>
+			<line transform="rotate(20 0 0)" y1="-200" y2="-180"></line>
+			<line transform="rotate(30 0 0)" y1="-220" y2="-180"></line>
+			<line transform="rotate(40 0 0)" y1="-200" y2="-180"></line>
+			<line transform="rotate(50 0 0)" y1="-200" y2="-180"></line>
+			<line transform="rotate(60 0 0)" y1="-220" y2="-180"></line>
+			<line transform="rotate(70 0 0)" y1="-200" y2="-180"></line>
+			<line transform="rotate(80 0 0)" y1="-200" y2="-180"></line>
+			<line transform="rotate(90 0 0)" y1="-220" y2="-180"></line>
+			<line transform="rotate(100 0 0)" y1="-200" y2="-180"></line>
+			<line transform="rotate(110 0 0)" y1="-200" y2="-180"></line>
+			<line transform="rotate(120 0 0)" y1="-220" y2="-180"></line>
+			<line transform="rotate(130 0 0)" y1="-200" y2="-180"></line>
+			<line transform="rotate(140 0 0)" y1="-200" y2="-180"></line>
+			<line transform="rotate(150 0 0)" y1="-220" y2="-180"></line>
+			<line transform="rotate(160 0 0)" y1="-200" y2="-180"></line>
+			<line transform="rotate(170 0 0)" y1="-200" y2="-180"></line>
+			<line transform="rotate(180 0 0)" y1="-220" y2="-180"></line>
+			<line transform="rotate(190 0 0)" y1="-200" y2="-180"></line>
+			<line transform="rotate(200 0 0)" y1="-200" y2="-180"></line>
+			<line transform="rotate(210 0 0)" y1="-220" y2="-180"></line>
+			<line transform="rotate(220 0 0)" y1="-200" y2="-180"></line>
+			<line transform="rotate(230 0 0)" y1="-200" y2="-180"></line>
+			<line transform="rotate(240 0 0)" y1="-220" y2="-180"></line>
+			<line transform="rotate(250 0 0)" y1="-200" y2="-180"></line>
+			<line transform="rotate(260 0 0)" y1="-200" y2="-180"></line>
+			<line transform="rotate(270 0 0)" y1="-220" y2="-180"></line>
+			<line transform="rotate(280 0 0)" y1="-200" y2="-180"></line>
+			<line transform="rotate(290 0 0)" y1="-200" y2="-180"></line>
+			<line transform="rotate(300 0 0)" y1="-220" y2="-180"></line>
+			<line transform="rotate(310 0 0)" y1="-200" y2="-180"></line>
+			<line transform="rotate(320 0 0)" y1="-200" y2="-180"></line>
+			<line transform="rotate(330 0 0)" y1="-220" y2="-180"></line>
+			<line transform="rotate(340 0 0)" y1="-200" y2="-180"></line>
+			<line transform="rotate(350 0 0)" y1="-220" y2="-180"></line>
+		</g>
+	</g>
+	</g>
+	
+  	<g class="quotesDonut" transform="translate(300 300)"></g>
+  	
+  	<g class="legends" transform="translate(0 500)">
+  		<!--
+  		<g class="legend" x="0" y="0" fill="#cd00dd" transform="translate(0 0)">
+  			<rect x="0" y="0" width="20" height="15"/>
+  			<text x="30" y="12" >tttt<text>
+  		</g>
+  		<g class="legend" x="0" y="0" fill="#cd0000" transform="translate(0 20)">
+  			<rect x="0" y="0" width="20" height="15"/>
+  			<text x="30" y="12" >tttt<text>
+  		</g>
+  		<g class="legend" x="0" y="0" fill="#cddd00" transform="translate(0 40)">
+  			<rect x="0" y="0" width="20" height="15"/>
+  			<text x="30" y="12" >tttt<text>
+  		</g>
+  		-->
+  	</g>
+  	
+	<!--
+	<g class="topg" transform="translate(130 400)">
+		<path transform="rotate(0 170 0) scale(1,1) skewX(60)" d="M0 0 C0,-200 340,-200 340,0" stroke="#ff0000" fill="none" style="stroke-width: 1px;"></path>
+		<path transform="rotate(10 170 0) scale(0.9,1)" d="M0 0 C0,-200 340,-200 340,0" stroke="#ff0000" fill="none" style="stroke-width: 1px;"></path>
+		<path transform="rotate(0 170 0) scale(0.8,1)" d="M0 0 C0,-200 340,-200 340,0" stroke="#ff0000" fill="none" style="stroke-width: 1px;"></path>
+		<path transform="rotate(0 170 0) scale(0.7,1)" d="M0 0 C0,-200 340,-200 340,0" stroke="#ff0000" fill="none" style="stroke-width: 1px;"></path>
+	</g>
+	-->
+</svg>

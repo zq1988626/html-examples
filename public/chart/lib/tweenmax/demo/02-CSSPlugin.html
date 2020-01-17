@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>TweenMax demon</title>
+        <script src="minified/TweenLite.min.js"></script>
+        <script src="minified/plugins/CSSPlugin.min.js"></script>
+        <!--www.tweenmax.com.cn演示实例-->
+		<!-- Demo styles -->
+		<style>
+			body {
+				background: #fff;
+				font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+				font-size: 14px;
+				color: #000;
+				margin: 0 10px;
+				padding: 0;
+			}
+			.box {
+				width:50px;
+				height:50px;
+				border-radius:6px;
+				margin-top:4px;
+				display:inline-block
+			  }
+		    .green{
+				background-color:#6fb936;
+			  }
+		</style>
+	</head>
+	<body>
+		<div class="box green"> </div>
+		<script>
+			TweenLite.to('.box', 3, {
+				x: 500,
+				alpha : 0.3,
+			});
+		</script>
+	</body>
+</html>

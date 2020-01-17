@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+	<script src="jquery-1.12.3.js" type="text/javascript"></script>
+	<!-- IE8 及以下浏览器使用 r2d3.min.js 其他浏览器使用 d3.v3.min.js -->
+	<!--[if lte IE 8]><script src="r2d3.min.js"></script><![endif]-->
+	<!--[if gte IE 9]><!-->
+	<script src="d3.v3.min.js"></script>
+	<!--<![endif]-->
+	<script src="yxmc.js"></script>
+    <link href="yxmc.css" rel="stylesheet" type="text/css" />
+    <style>
+    </style>
+<body style=" white-space: nowrap; background:#000;">
+	<div>
+		<div class="yxmc" style="width:50%">
+			<div class="messagebox" style=" text-align: left;">
+				<div>
+					#1煤场总存煤信息<br />
+					总存煤量：xxxx吨<br />
+					总存煤量：xxxx吨<br />
+					总存煤量：xxxx吨<br />
+					总存煤量：xxxx吨<br />
+					总存煤量：xxxx吨<br />
+					总存煤量：xxxx吨<br />
+					总存煤量：xxxx吨<br />
+					总存煤量：xxxx吨<br />
+				</div>
+			</div>
+			<div class="topimgBox"><img class="topimg" src="img/pic_coalyard_dome.png" /></div>
+			<div class="piebox" id="box1"></div>
+		</div>
+		<div class="yxmc" style="width:50%">
+			<div class="messagebox" style=" text-align: right;">
+				<div>
+					#2煤场总存煤信息<br />
+					总存煤量：xxxx吨<br />
+					总存煤量：xxxx吨<br />
+					总存煤量：xxxx吨<br />
+					总存煤量：xxxx吨<br />
+					总存煤量：xxxx吨<br />
+					总存煤量：xxxx吨<br />
+					总存煤量：xxxx吨<br />
+					总存煤量：xxxx吨<br />
+				</div>
+			</div>
+			<div class="topimgBox"><img class="topimg" src="img/pic_coalyard_dome.png" /></div>
+			<div class="piebox" id="box2"></div>
+		</div>
+	</div>
+	
+<script>
+	
+	//生成数据
+	var randomData = function (){
+		var list = [];
+		var colors = ["#FF1203","#FF6600","#FD9D01","#FBD202","#F7FF01","#B0DE09","#05D216","#0E8ECE","#0D51D0","#2B0ED0","#890BCE"];
+		var datas = ["煤种1","煤种2","煤种3","煤种4","煤种1","煤种2","煤种3","煤种4","煤种1","煤种2","煤种3"];
+		for(var i =0;i<datas.length;i++){
+			list.push({
+				height:Math.random()*60,
+				label:datas[i], 
+				value:Math.random()*100,
+				color:colors[i%colors.length],
+				class:"drzym",
+				zcml:Math.round(Math.random()*10000),
+				zcml2:Math.round(Math.random()*10000)
+				})
+		}
+		return list;
+	}
+	
+	
+	var chart = {
+		height:90,rh:60,rw:172,x:50,y:70,
+		tooltipfomatter:function(obj){
+			return [obj.label,"存煤量："+obj.zcml+"吨"].join("<br />");
+		},
+		clickcallback:function(d){
+			alert(d.data.label);
+		},
+		draw:function(id,data){
+			Donut3D.draw(id, data.data, this.rw, this.rh, this.height, 0,this.tooltipfomatter,this.clickcallback);
+			//Donut3D.drawLegend(id, data.data);
+			Donut3D.drawTitle(id, data.title);
+		},
+		transition:function(id,data,jd){
+			Donut3D.transition(id,data.data,this.rw, this.rh, this.height, 0,jd);
+		}
+	};
+	
+	function importSvg(){
+		$.get("yxmc.svg",function(data){
+			$("#box1").html(data);
+			$("#box2").html(data);
+			chart.draw("box1",{data:randomData(),title:{text:"#1煤场",x:0}});
+			chart.draw("box2",{data:randomData(),title:{text:"#2煤场",x:0}});
+		},"text");
+	}
+	
+	$(function(){
+		importSvg();
+	})
+
+	
+	
+	
+
+</script>
+</body>
+</html>

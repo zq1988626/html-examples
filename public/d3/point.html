@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<script src="d3-timer.js"></script>
+<style>
+    body{
+        margin:0px;
+    }
+    html,body{height:100%;width:100%;}
+    canvas{
+        position: absolute;
+        left:50%;
+        top:50%;
+        margin-left:-500px;
+        margin-top:-200px;
+        width:1000px;
+        height:400px;
+        background:url(bg1.jpg);
+        background-size: cover;
+        background-position: center center;
+    }
+</style>
+<body>
+    <canvas width="1000" height="400"></canvas>
+    <div style="position:absolute;left:10px;top:10px;border:1px solid red; background: #fff;">
+      window:width<span id="wx">0</span>px,height<span id="wy">0</span>px;
+      point:width<span id="ix">0</span>px,height<span id="iy">0</span>px;
+    </div>
+</body>
+<script>
+  var log = function(wx,wy,ix,iy){
+    document.getElementById("wx").innerHTML = wx;
+    document.getElementById("wy").innerHTML = wy;
+    document.getElementById("ix").innerHTML = ix;
+    document.getElementById("iy").innerHTML = iy;
+  }
+
+  var canvas = document.querySelector("canvas"),width,height;
+
+  var resizeCanvas = function(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    canvas.style.width = window.innerWidth+"px";
+    canvas.style.height = window.innerHeight+"px";
+    canvas.style.marginLeft = (window.innerWidth/-2)+"px";
+    canvas.style.marginTop = (window.innerHeight/-2)+"px";
+    width = window.innerWidth;
+    height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.onresize = function(){
+    resizeCanvas();
+  };
+  var context = canvas.getContext("2d"),
+    width = canvas.width,
+    height = canvas.height,x
+    radius = 5,
+    minDistance = 0,
+    maxDistance = 30,
+    minDistance2 = minDistance * minDistance,
+    maxDistance2 = maxDistance * maxDistance;
+
+var tau = 2 * Math.PI,
+    n = 500,
+    particles = new Array(n),
+    items = [
+      {x:33.3,y:33.3,vx:0,vy:0,color:"#FFF"},
+      {x:66.6,y:33.3,vx:0,vy:0,color:"#FFF"},
+      {x:33.3,y:66.6,vx:0,vy:0,color:"#FFF"},
+      {x:66.6,y:66.6,vx:0,vy:0,color:"#FFF"}
+    ];
+
+
+var createPoint = function(p){
+  var target = items[Math.floor(Math.random()*items.length)%items.length];
+  var p = p||{};
+  p.x = Math.random() * 100
+  p.y = Math.random() * 100
+  p.vx=  0
+  p.vy=  0
+  p.tx= target.x
+  p.ty=target.y
+  p.s = 0.05*Math.random()+0.05;
+  return p;
+}
+for (var i = 0; i < n; ++i) {
+  particles[i] = createPoint();/*{
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    vx: 0,
+    vy: 0,
+    s:0.2*Math.random(),
+    target:Math.floor(Math.random()*3)%3
+  };*/
+}
+
+
+//根据当前位置、目标位置、速度 计算下一次位置
+var getPoint = function(p){
+
+}
+
+
+timer.timer(function(elapsed) {
+  context.save();
+  context.clearRect(0, 0, width, height);
+
+  var poinx = width/100;
+  var poiny = height/100;
+  //var hwb = height/width;//宽高比
+  log(width,height,poinx,poiny);
+  
+  for(var i =0;i<items.length;i++){
+    context.beginPath();
+    context.arc(items[i].x*poinx, items[i].y*poiny, 50, 0, tau);
+    context.fillStyle = items[i].color+"6";
+    context.fill();
+  }
+
+  //更新点位，以及偏移量
+  for (var i = 0; i < n; ++i) {
+    var p = particles[i];
+    //超出边界
+    /*
+    p.x += p.vx; 
+    if (p.x < -maxDistance) { p.x += 100 + maxDistance * 2;  }
+    else if (p.x > 100 + maxDistance){ p.x -= 100 + maxDistance * 2;} 
+    p.y += p.vy; 
+    if (p.y < -maxDistance) { p.y += 100 + maxDistance * 2; } 
+    else if (p.y > 100 + maxDistance) {p.y -= 100 + maxDistance * 2;}
+    */
+
+    var cx = (p.tx-p.x)*poinx;
+    var cy = (p.ty-p.y)*poiny;
+    var len = Math.sqrt(Math.abs(cx*cx)+Math.abs(cy*cy));
+    if(len<50){
+      createPoint(p);
+    }else{
+      if (p.x<p.tx){
+        p.x+=p.vx
+      }else/*(p.x>p.tx)*/{
+        p.x-=p.vx
+      }
+      if (p.y<p.ty){
+        p.y+=p.vy
+      }else/*(p.x>p.tx)*/{
+        p.y-=p.vy
+      }
+    }
+
+    var w = Math.abs(p.x-p.tx),
+      h = Math.abs(p.y-p.ty);
+    var b = w/h;
+    p.vx = b*p.s;
+    p.vy = p.vx/b;
+
+    //p.vx += 0.05 * (Math.random() - .5) - 0.01 * p.vx;
+    //p.vy += 0.05 * (Math.random() - .5) - 0.01 * p.vy;
+    //p.vx = p.s;
+    //p.vy = p.s;
+
+    context.beginPath();
+    context.strokeStyle = "#3FC";
+    //context.rect(p.x*poinx, p.y*poiny,radius,radius);
+    context.arc(p.x*poinx, p.y*poiny, radius, 0, tau);
+
+    
+    var opacity = "0";
+    var maxLen = 500;
+    if(len<maxLen){
+      opacity = (15-Math.round(Math.abs(len/maxLen*15))).toString(16);
+    }
+    context.fillStyle = "#3FC"+opacity;
+    context.fill();
+    
+    var target = items[p.target];
+
+    
+    var pi = p,
+        pj = {x:p.tx,y:p.ty},
+        dx = pi.x - pj.x,
+        dy = pi.y - pj.y,
+        d2 = dx * dx + dy * dy;
+      if (d2 < maxDistance2) {
+        context.globalAlpha = d2 > minDistance2 ?
+        (maxDistance2 - d2) / (maxDistance2 - minDistance2) : 1;
+        context.beginPath();
+        context.strokeStyle = "#fff0";
+        context.moveTo(pi.x*poinx, pi.y*poiny);
+        //context.lineTo(50*poinx, 50*poiny);
+        context.lineTo(pj.x*poinx, pj.y*poiny);
+        context.stroke();
+      }
+  }
+
+  //划线
+  /*
+  for (var i = 0; i < n; ++i) {
+    for (var j = i + 1; j < n; ++j) {
+      var pi = particles[i],
+          pj = particles[j],
+          dx = pi.x - pj.x,
+          dy = pi.y - pj.y,
+          d2 = dx * dx + dy * dy;
+      if (d2 < maxDistance2) {
+        context.globalAlpha = d2 > minDistance2 ?
+        (maxDistance2 - d2) / (maxDistance2 - minDistance2) : 1;
+        context.beginPath();
+        var opacity = 15-Math.round(d2/maxDistance2*15);
+        
+        context.strokeStyle = "#fff"+opacity.toString(16);
+
+        context.moveTo(pi.x*poinx, pi.y*poiny);
+        //context.lineTo(50*poinx, 50*poiny);
+        context.lineTo(pj.x*poinx, pj.y*poiny);
+        context.stroke();
+      }
+    }
+  }
+  */
+
+  context.restore();
+});
+
+</script>

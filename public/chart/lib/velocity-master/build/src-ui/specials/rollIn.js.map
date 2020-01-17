@@ -1,0 +1,1 @@
+{"version":3,"file":"rollIn.js","sourceRoot":"","sources":["../../../src-ui/specials/rollIn.ts"],"names":[],"mappings":"AAAA;;;;;;GAMG;AAEH,OAAO,QAAQ,MAAM,kBAAkB,CAAC;AAExC,QAAQ,CAAC,kBAAkB,EAAE,QAAQ,EAAE;IACtC,UAAU,EAAE,IAAI;IAChB,IAAI,EAAE;QACL,OAAO,EAAE,GAAG;QACZ,SAAS,EAAE,gDAAgD;KAC3D;IACD,MAAM,EAAE;QACP,OAAO,EAAE,GAAG;QACZ,SAAS,EAAE,sCAAsC;KACjD;CACD,CAAC,CAAC"}

@@ -1,0 +1,120 @@
+.kjtabs.nav-tabs{
+	white-space: nowrap;
+	border-bottom:0px;
+}
+.kjtabs-header-wrap{
+	background:#fff;
+	overflow: hidden;
+}
+
+.kjtabs.nav-tabs > li {
+	display: inline-block;
+	float: none;
+}
+.kjtabs.nav-tabs > li > a{
+  	transition: all 0.2s;
+  	margin-right: 0px;
+}
+
+.kjtabs.nav-tabs > li:hover > a,
+.kjtabs.nav-tabs > li.active > a {
+	background: #568EFF;
+  	color: #FFFFFF;
+  	border-radius: unset;
+}
+
+.kjtabs.nav-tabs .menutitle.badge{
+	background:transparent;
+}
+
+
+.badge.menutitle {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    line-height: 20px;
+    font-size: 25px;
+    border-radius: 50% !important;
+    display: none;
+    cursor: pointer;
+}
+
+.kjtabs.nav.nav-tabs li:hover .badge.menutitle{
+    display:block;
+}
+
+
+.navbar-brand > a,
+.navbar-brand > a:visited{
+	color:#aaccff
+} 
+.navbar-brand > a:active,
+.navbar-brand > a:focus{
+	color:#fff
+}
+
+
+
+.hasscroll > div{
+	display: table-cell;
+}
+.hasscroll > div.scrollbtn{
+	width:20px;  
+	text-align: center;
+	cursor: pointer;
+}
+.hasscroll > div.scrollbtn:hover{
+	
+	color:#568EFF;
+}
+
+
+.hasscroll{
+	table-layout: fixed;
+	display: table;
+	width:100%;
+}
+.hasscroll > div.scrollbtn.disabled{
+	color: #ccc;
+}
+
+
+.list-complete-item {
+  transition: all 0.2s;
+  display: inline-block;
+}
+.list-complete-move {
+  transition: transform 0.5s;
+}
+.list-complete-enter, .list-complete-leave-to{
+  opacity: 0;
+  transform: translateY(-30px);
+}
+.list-complete-leave-active {
+  position: absolute;
+}
+
+/* iframe 动画 */
+.list-complete-y-item {
+  position:absolute;
+  opacity: 1;
+}
+
+.list-complete-y-move {
+	
+}
+.list-complete-y-enter{
+  transform: translateY(-30px);
+  opacity: 0;
+} 
+.list-complete-y-leave-to{
+  transform: translateY(-30px);
+  opacity: 0;
+}
+.list-complete-y-enter-active, 
+.list-complete-y-leave-active {
+  transition: all .5s ease;
+}

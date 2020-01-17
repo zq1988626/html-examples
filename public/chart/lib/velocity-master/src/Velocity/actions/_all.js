@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+require("./finish");
+require("./option");
+require("./pauseResume");
+require("./property");
+require("./reverse");
+require("./stop");
+require("./style");
+require("./tween");

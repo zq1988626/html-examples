@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../jquery/jquery-1.12.4.js"></script>
+		<script src="../jquery/jquery.resize.js"></script>
+		<script src="layout.js"></script>
+		<style>
+			.layout-c,.layout-h,.layout-v{
+				border: 1px solid red;
+			}
+			.layout-theme-space10 {
+				padding:10px;
+			}
+			.layout-theme-space10 > .layout-h + .layout-h{
+				margin-top:10px;
+			} 
+			.layout-theme-space10 > .layout-v{
+				margin-right:10px;
+			} 
+			
+			.layout-theme-space10 > .layout-v,
+			.layout-theme-space10 > .layout-c{
+				margin-top:10px;
+			}
+			
+			.layout-theme-space10 > .layout-c + .layout-h,
+			.layout-theme-space10 > .layout-v + .layout-h{
+				margin-top:10px;
+			} 
+			.layout-theme-space10 > .layout-c + .layout-v-after,
+			.layout-theme-space10 > .layout-v-after{
+				margin-right:0px;
+				margin-left:10px;
+			}
+		</style>
+	</head>
+	<body class="layout-theme-space10" style="margin:10px;border:10px solid green;">
+		<div class="layout-h" style="padding:10px;">top1</div>
+		<div class="layout-h" style="padding:10px;">top2</div>
+		<div class="layout-h" style="padding:10px;">top3</div>
+		<div class="layout-v" style="width:50px;"></div>
+		<div class="layout-v" style="width:200px;border-width:0px;">
+			<div class="layout-h" style="margin-bottom:10px;">搜索</div>
+			<div class="layout-c">树形结构</div>
+		</div>
+		<div class="layout-c" style="padding:8px;border:10px solid red;min-height:200px">
+			<div class="layout-c" style="border:10px solid green;">
+				<div class="layout-h" style="border:10px solid yellow;height:100px;">
+					
+				
+				</div>
+				<div class="layout-c" style="border:10px solid #666;">
+					<table>
+						<tr>
+							<td>1</td>
+							<td>2</td>
+							<td>3</td>
+							<td>4</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>2</td>
+							<td>3</td>
+							<td>4</td>
+						</tr>
+					</table>
+				
+				</div>
+			
+			</div>
+		</div>
+		<div class="layout-v" style="width:50px;">right22</div>
+		<div class="layout-v" style="width:200px;">right</div>
+		<div class="layout-h">bottom1</div>
+		<div class="layout-h">bottom2</div>
+		<script>
+			$(function(){
+				$.layout.callback.add(function(){
+					console.log(1);
+				},"test");
+				$.layout.callback.add(function(){
+					console.log(2);
+				},"test");
+				$.layout.callback.add(function(){
+					console.log(3);
+				},"test");
+				$.layout(function(){
+					console.log("test1")
+				});
+				$.layout(function(){
+					console.log("test2")
+				});
+				$.layout(function(){
+					console.log("test3")
+				});
+				$.layout(true)
+			})
+		</script>
+	</body>
+</html>

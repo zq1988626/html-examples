@@ -1,0 +1,1 @@
+{"version":3,"file":"fadeOut.js","sourceRoot":"","sources":["../../../src-ui/fading_exits/fadeOut.ts"],"names":[],"mappings":"AAAA;;;;;;GAMG;AAEH,OAAO,QAAQ,MAAM,kBAAkB,CAAC;AAExC,QAAQ,CAAC,kBAAkB,EAAE,SAAS,EAAE;IACvC,UAAU,EAAE,IAAI;IAChB,IAAI,EAAE;QACL,OAAO,EAAE,GAAG;KACZ;IACD,MAAM,EAAE;QACP,OAAO,EAAE,GAAG;KACZ;CACD,CAAC,CAAC"}

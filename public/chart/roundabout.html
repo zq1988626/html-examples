@@ -1,0 +1,309 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>A Standard Roundabout</title>
+
+    <link href="lib/jquery.roundabout/jquery.roundabout.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="lib/jquery.roundabout/jquery.roundabout.min.js"></script>
+    <script type="text/javascript" src="lib/jquery.roundabout/jquery.roundabout-shapes.js"></script>
+    <script type="text/javascript" src="js/jquery.easing/jquery.easing.js"></script>
+    
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        a,
+        img {
+            border: 0;
+        }
+        body {
+            font: 12px/180% Arial, Helvetica, sans-serif, "新宋体";
+        }
+    </style>
+
+</head>
+
+<body>
+    
+    <ul class="roundabout-silder">
+        <li><span>Block 1</span></li>
+        <li><span>Block 2</span></li>
+        <li><span>Block 3</span></li>
+        <li><span>Block 4</span></li>
+        <li><span>Block 5</span></li>
+    </ul>
+
+    <script>
+        $(document).ready(function () {
+            $('.roundabout-silder').roundabout();
+        });
+    </script>
+	
+
+    <style type="text/css">
+        
+        .crappy-plastic-part-made-in-china{background-color:#222;height:1.8em;font-size:6em;overflow:hidden;}
+        .pad{width:6.8em;margin:0 auto;height:1.8em;}
+        .pad ul{list-style:none;padding:0;margin:-2.15em -20px 0 0;width:0.85em;height:6em;float:left;}
+        .pad li{height:2em;width:0.7em;line-height:2;background-color:#222;color:#fff;text-align:center;cursor:pointer;font-weight:bold;font-family:"Helvetica Neue", Arial, sans-serif;}
+        .pad li.roundabout-in-focus{cursor:default;}
+        #ampm,#ampm li{width:1.8em;}
+        #ampm{margin-left:0.2em;}
+        .delimiter, .delimiter li{width:0.5em;text-align:center;}
+        .delimiter{margin-left:6px;margin-right:-12px;}
+        .pad li span{display:block;padding-top:6em;}
+    </style>
+    <div class="crappy-plastic-part-made-in-china" style="margin-top:100px;">
+        <div class="pad">
+            <ul id="hours-tens">
+                <li>&nbsp;</li>
+                <li>1</li>
+            </ul>
+            <ul id="hours-ones">
+                <li>0</li>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+                <li>6</li>
+                <li>7</li>
+                <li>8</li>
+                <li>9</li>
+            </ul>
+    
+            <ul class="delimiter">
+                <li>:</li>
+            </ul>
+    
+            <ul id="minutes-tens">
+                <li>0</li>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+            </ul>
+            <ul id="minutes-ones">
+                <li>0</li>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+                <li>6</li>
+                <li>7</li>
+                <li>8</li>
+                <li>9</li>
+            </ul>
+    
+            <ul class="delimiter">
+                <li>:</li>
+            </ul>
+    
+            <ul id="seconds-tens">
+                <li>0</li>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+            </ul>
+            <ul id="seconds-ones">
+                <li>0</li>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+                <li>6</li>
+                <li>7</li>
+                <li>8</li>
+                <li>9</li>
+            </ul>
+            <ul id="ampm">
+                <li>am</li>
+                <li>pm</li>
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        var breakdown = getDateBreakdown();
+        
+        $('ul#hours-tens').roundabout({
+            easing: 'easeOutExpo',
+            shape: 'waterWheel',
+            startingChild: breakdown.hoursTens,
+            minScale: 1
+        });
+        $('ul#hours-ones').roundabout({
+            easing: 'easeOutExpo',
+            shape: 'waterWheel',
+            startingChild: breakdown.hoursOnes,
+            minScale: 1
+        });
+    
+        $('ul#minutes-tens').roundabout({
+            easing: 'easeOutExpo',
+            shape: 'waterWheel',
+            startingChild: breakdown.minutesTens,
+            minScale: 1
+        });
+        $('ul#minutes-ones').roundabout({
+            easing: 'easeOutExpo',
+            shape: 'waterWheel',
+            startingChild: breakdown.minutesOnes,
+            minScale: 1
+        });
+    
+        $('ul#seconds-tens').roundabout({
+            easing: 'easeOutExpo',
+            shape: 'waterWheel',
+            startingChild: breakdown.secondsTens,
+            minScale: 1
+        });
+        $('ul#seconds-ones').roundabout({
+            easing: 'easeOutExpo',
+            shape: 'waterWheel',
+            startingChild: breakdown.secondsOnes,
+            minScale: 1
+        });
+    
+        $('ul#ampm').roundabout({
+            easing: 'easeOutExpo',
+            shape: 'waterWheel',
+            startingChild: breakdown.ampm
+        });
+        $('ul.delimiter').roundabout({
+            easing: 'easeOutExpo',
+            shape: 'waterWheel'
+        });
+        
+        setInterval(function() {
+            var breakdown = getDateBreakdown();
+            $('ul#hours-tens').roundabout("animateToChild", breakdown.hoursTens);
+            $('ul#hours-ones').roundabout("animateToChild", breakdown.hoursOnes);
+            $('ul#minutes-tens').roundabout("animateToChild", breakdown.minutesTens);
+            $('ul#minutes-ones').roundabout("animateToChild", breakdown.minutesOnes);
+            $('ul#seconds-tens').roundabout("animateToChild", breakdown.secondsTens);
+            $('ul#seconds-ones').roundabout("animateToChild", breakdown.secondsOnes);
+            $('ul#ampm').roundabout("animateToChild", breakdown.ampm);
+        }, 1000);
+        
+    });
+    
+    function getDateBreakdown() {
+        var date = new Date(), breakdown = {};
+        breakdown.hoursTens = (date.getHours() === 0 || date.getHours() == 23 || date.getHours() == 22 || date.getHours() == 11 || date.getHours() == 12 || date.getHours() == 10) ? 1 : 0;
+        breakdown.hoursOnes = (date.getHours() === 0 || date.getHours() > 12) ? Math.abs(date.getHours() - 12) % 10 : date.getHours() % 10;
+        breakdown.minutesTens = (date.getMinutes() - (date.getMinutes() % 10)) / 10;
+        breakdown.minutesOnes = date.getMinutes() % 10;
+        breakdown.secondsTens = (date.getSeconds() - (date.getSeconds() % 10)) / 10;
+        breakdown.secondsOnes = date.getSeconds() % 10;
+        breakdown.ampm = (date.getHours() > 11) ? 1 : 0;
+        return breakdown;
+    };
+    </script>
+
+    <style>
+        
+        .test3 ul{margin-bottom:3em;}
+        .test3 .roundabout-holder{width:5em;height:5em;overflow:hidden;margin:0;padding:0;position:relative;list-style:none;top:-5px;}
+        .test3 .roundabout-moveable-item{width:12em;height:1.5em;line-height:1.5;font-size:16px;text-align:center;cursor:pointer;color:#329;font-family:Chalkboard, Comic Sans, awful-awful-font;}
+        .test3 .roundabout-in-focus{cursor:auto;}
+        .test3 form{margin-top:5em;margin-bottom:28px;margin-left:224px }
+        .test3 .part{float:left;display:inline;width:auto;}
+        .test3 .button{margin-left:2em;}
+        .test3 .part.moving{margin-top:-1.70em;}
+        .test3 .clear{display:block;clear:both;}
+
+    </style>
+<div class="test3" style="margin-top:50px;">
+    <div class="part">The</div>
+    <div class="part moving adjective">
+        <ul>
+            <li>quick</li>
+            <li>happy</li>
+            <li>apple</li>
+            <li>confused</li>
+            <li>drunk</li>
+        </ul>
+    </div>
+    <div class="part">brown fox</div>
+    <div class="part moving verb">
+        <ul>
+            <li>jumps</li>
+            <li>stumbles</li>
+            <li>backs</li>
+            <li>vomits</li>
+            <li>backflips</li>
+        </ul>
+    </div>				
+    <div class="part">over the</div>
+    <div class="part moving feeling">
+        <ul>
+            <li>lazy</li>
+            <li>white</li>
+            <li>sturdy</li>
+            <li>pickled</li>
+            <li>expired</li>
+        </ul>
+    </div>
+    <div class="part">dog.</div>
+    <div class="part button">
+        <input type="hidden" id="hidden-adjective" name="hidden-adjective" value="" />
+        <input type="hidden" id="hidden-verb" name="hidden-verb" value="" />
+        <input type="hidden" id="hidden-feeling" name="hidden-feeling" value="" />
+        <input type="submit" value="提交" name="post" id="post-it" />
+    </div>
+</div>
+
+<span class="clear"></span>
+    
+
+<script>
+	$(document).ready(function() {
+		$('.test3 .verb ul li').focus(function() {
+			$('#hidden-verb').val($(this).text());
+		});
+
+		$('.test3 .feeling ul li').focus(function() {
+			$('#hidden-feeling').val($(this).text());
+		});
+
+		$('.test3 .adjective ul li').focus(function() {
+			$('#hidden-adjective').val($(this).text());
+		});
+
+		$('.test3 ul').roundabout({
+			shape: 'waterWheel',
+			minOpacity: -1.0,
+			duration: 300,
+			easing: 'easeOutCubic'
+		});
+		
+		$('.test3 li').dblclick(function(e) {
+			e.preventDefault();
+			return false;
+		});
+		
+		$('.test3 input[type=submit]').click(function(e) {
+			e.preventDefault();
+			alert('You think that the ' + $('#hidden-adjective').val() + ' brown fox ' + $('#hidden-verb').val() + ' over the ' + $('#hidden-feeling').val() + ' dog.');
+			return false;
+		});
+	});
+</script>
+
+
+
+</body>
+
+</html>

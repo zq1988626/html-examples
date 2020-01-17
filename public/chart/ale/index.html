@@ -1,0 +1,13 @@
+<script src="https://cdn.jsdelivr.net/npm/alejs@1.2.0/ale.js"></script>
+<div id="app"></div>
+<script>
+    //定义一个名为 com1 的组件
+    Ale("com1", {
+        /* 配置模板为HelloWorld */
+        template: "HelloWorld"
+    });
+    Ale.render("com1", {
+        el: "#app" /* 渲染一个组件时必须添加el属性，用来选中元素 */
+    });
+
+</script>

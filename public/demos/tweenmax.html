@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0">
+    <title>开元坤佳官网</title>
+    <style>
+        body {
+            font-family: 'Bungee Inline', sans-serif;
+            overflow:hidden;
+        }
+
+        #headertitle {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            position: relative;
+            top: 0;
+            left: 0;
+        }
+
+        .navbar-kjsoft {
+            padding: 0px 0vh;
+            background-color: rgba(255, 255, 255, 0);
+            min-height: 0px;
+            position: fixed;
+            top: 0px;
+            z-index: 100;
+        }
+
+        .navbar-kjsoft {
+            border-color: transparent;
+            background-color: transparent;
+        }
+
+        .navbar-kjsoft .navbar-toggle .icon-bar {
+            background-color: red;
+        }
+
+        .navbar-kjsoft a {
+            color: #fff;
+        }
+
+        .cdiv {
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            position: absolute;
+            z-index: 1;
+            bottom: 0px;
+            right: 0px;
+            top: 0px;
+            left: 0px;
+            z-index: -1;
+            color: #fff;
+        }
+        .bg{
+            background-size: cover;
+        }
+        .bg1 {
+            background-image: url(https://qty83k.creatby.com/materials/95622/origin/4c706a72b8fd6fa366a87192b736dbbc_origin.jpg);
+        }
+        .bg2 {
+            background-image: url(https://qty83k.creatby.com/materials/95622/origin/57ebc29ce2b2362c1644a4b78b054183_origin.jpg);
+        }
+        .bg3{
+            background-image: url(https://qty83k.creatby.com/materials/95622/origin/439e06e36542ca09ac5a907b1940373c_origin.jpg);
+        }
+
+        .list-item {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            color: #fff;
+        }
+
+        .list-item-content {
+            height: 100%;
+            border-left: 1px solid rgba(255, 255, 255, 0.2);
+            border-right: 1px none rgba(255, 255, 255, 0.2);
+            margin-left: 15vh;
+            margin-right: 15vh;
+            position: relative;
+            z-index: 99;
+        }
+
+        .list-item-content * {
+            position: relative;
+        }
+
+        .list-item-content-left {
+            position: absolute;
+            left: 0px;
+            width: 100%;
+            padding-left: 5vh;
+            padding-right: 5vh;
+            padding-bottom: 8vh;
+            top: 30vh;
+        }
+
+        .list-item-content-title {
+            color: rgb(255, 255, 255);
+            font-size: 5.2vh;
+            margin-right: -50px;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .list-item-content-text {
+            font-family: 'PingFang SC', "Microsoft YaHei" !important;
+            max-width: 100%;
+            color: rgb(255, 255, 255);
+            font-size: 1.6vh;
+            margin-bottom: 25px;
+            line-height: 2em;
+        }
+
+        .pagecontroller li {
+            /*opacity: 0.5;*/
+        }
+
+        .pagecontroller a {
+            color: #fff;
+        }
+        .bootstrap-kjsoft-home a:focus,.bootstrap-kjsoft-home a:hover{
+            color: #fff;
+        }
+        .bootstrap-kjsoft-home .nav>li>a:focus,.bootstrap-kjsoft-home .nav>li>a:hover {
+            text-decoration: none;
+            background-color: transparent;
+            color:#fff;
+            
+        }
+        .bootstrap-kjsoft-home .nav .open>a,
+        .bootstrap-kjsoft-home .nav .open>a:focus,
+        .bootstrap-kjsoft-home .nav .open>a:hover{
+            color: #fff;
+            font-weight:bold;
+            background-color: transparent;
+        }
+        .btn1bg{
+            position:absolute;height:0;width:100%;left:0;top:0;background:#000;z-index: -1;
+        }
+    </style>
+    <script src="js/jquery-1.12.4.min.js"></script>
+    <script src="js/jquery.mousewheel/jquery.mousewheel.js"></script>
+    <link href="js/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="js/bootstrap/js/bootstrap.min.js"></script>
+    <script src="lib/tweenmax/greensock-js/src/minified/TweenMax.min.js"></script>
+</head>
+
+<body class="bootstrap-kjsoft-home">
+    <nav class="navbar navbar-kjsoft">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                    aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a id="headertitle" class="navbar-brand" href="#">开源坤佳</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active" style="position:relative;">
+                        <a id="btn1" href="#">首页 <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li>
+                        <a href="#">Link</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                            aria-expanded="false">关于我们 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Link</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                            aria-expanded="false">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <main>
+        <div id="content1" class="list-item">
+            <div class="cdiv bg bg1"></div>
+            <div class="cdiv"></div>
+            <div class="list-item-content">
+                <div class="list-item-content-left">
+                    <div class="list-item-content-title">更快，更智能，更清洁</div>
+                    <div class="list-item-content-text">聚合全球创新，以智能风电为切入，把能源科技打造为让人类生活更美好的产品</div>
+                </div>
+            </div>
+        </div>
+        <div id="content2" class="list-item">
+            <div class="cdiv bg bg2"></div>
+            <div class="cdiv"></div>
+            <div class="list-item-content">
+                <div class="list-item-content-left">
+                    <div class="list-item-content-title">更快，更智能，更清洁更智能，更清洁更智能，更清洁</div>
+                    <div class="list-item-content-text">聚合全球创新，聚合全球创新，聚合全球创新，聚合全球创新，以智能风电为切入，把能源科技打造为让人类生活更美好的产品</div>
+                </div>
+            </div>
+        </div>
+        <div class="list-item">
+            <div class="cdiv bg bg3"></div>
+            <div class="cdiv"></div>
+            <div class="list-item-content">
+                <div class="list-item-content-left">
+                    <div class="list-item-content-title">更快，更智能，更清洁更智能，更清洁更智能，更清洁</div>
+                    <div class="list-item-content-text">聚合全球创新，聚合全球创新，聚合全球创新，聚合全球创新，以智能风电为切入，把能源科技打造为让人类生活更美好的产品</div>
+                </div>
+            </div>
+        </div>
+        <div class="pagecontroller" style="position: absolute;top:100px;right:100px;color:#fff;">
+            <ul class="buttons">
+                <li><a href="#1">欢迎访问</a></li>
+                <li><a href="#2">社会责任</a></li>
+                <li><a href="#3">关于我们</a></li>
+            </ul>
+        </div>
+    </main>
+    <script>
+        //速度
+        var speed = 0.5;
+
+        /*开场动画*/
+        var windowloadAnimation = function () {
+            var $ele = $("#headertitle")
+            var text = $ele.text().trim();
+            $ele.empty();
+            $(text.split("")).each(function (i, v) {
+                $ele.append(`<span class="color-${i%4+1}">${v}</span>`);
+            });
+            TweenMax.staggerFrom($ele.children(), 0.5, {
+                opacity: 0,
+                x: -20,
+                ease: Back.easeOut
+            }, 0);
+            TweenMax.staggerFrom($(".navbar.navbar-kjsoft"), 0.5, {
+                opacity: 0,
+                y: -20,
+                ease: Back.easeOut
+            }, 0.02);
+        }
+
+        //按钮动画
+        var addButtonAnimation = function(){
+            $(".nav.navbar-nav > li > a").each(function(){
+                var btnBG = $('<div class="btn1bg"></div>').appendTo($(this))
+                $(this).hover(function(){
+                    TweenMax.to(btnBG, 0.5, {
+                        height:"100%"
+                    }, 0.02);
+                },function(){
+                    TweenMax.to(btnBG, 0.5, {
+                        height:"0%"
+                    }, 0.02);
+                });
+            });
+        }
+
+        //通用创建动画方法
+        var createAnimationCreater = function (index,opt) {
+            var box = $(".list-item:eq(" + index + ")");
+            var head = box.find(".list-item-content-title"),
+                content = box.find(".list-item-content-text"),
+                control = $(".pagecontroller li:eq(" + index + ")");
+            var _animations = {
+                box:{opacity: 0},
+                control:{opacity: 0.5},
+                head:{top: -100,opacity: 0},
+                content:{left: -100,opacity: 0}
+            }
+            $.extend(true,_animations,opt);
+            var tl = new TimelineLite({paused:true});
+            tl.from(box, speed, _animations.box, 0);
+            tl.from(control, speed, _animations.control, 0);
+            tl.from(head, speed, _animations.head, 0.5);
+            tl.from(content, speed, _animations.content, 0.5);
+            return tl;
+        }
+
+        $(function () {
+            //动画列表
+            var animations = {};
+            var lastSelectIndex = -1;
+            var listLength = $(".list-item").length;
+            $(window).mousewheel(function (event) {
+                var newindex = lastSelectIndex + event.deltaY * -1;
+                if (newindex < 0) {
+                    newindex = 0;
+                } else if (newindex > listLength-1) {
+                    newindex = listLength-1;
+                } else {
+                    select(newindex);
+                }
+            });
+            animations[0] = createAnimationCreater(0,{
+                head:{top: -100,opacity: 0},
+                content:{top: 100,opacity: 0},
+                box:{top:30,left:30,right:30,bottom:30}
+            })
+            animations[1] = createAnimationCreater(1,{
+                head:{left: -100,opacity: 0},
+                content:{left: 100,opacity: 0},
+                box:{top:-300,left:30,right:30,bottom:30}
+            })
+            animations[2] = createAnimationCreater(2,{
+                head:{left: -600,top:-600,opacity: 0},
+                content:{left: 600,top:600,opacity: 0},
+                box:{rotation:360}
+            })
+
+            var select = function (i) {
+                var $ele = $(".list-item").eq(i);
+                if(lastSelectIndex>-1&&animations[lastSelectIndex]){
+                    animations[lastSelectIndex].reverse(0);
+                }
+                lastSelectIndex = i;
+                animations[i] && animations[i].play(0);
+            }
+
+            $(".buttons li a").click(function (i, ele) {
+                select($(this).parent().index());
+            })
+
+            //开场
+            windowloadAnimation();
+            //添加按钮动画
+            addButtonAnimation();
+            //选择第一屏
+            select(0);
+            $(".dropdown-toggle").dropdown("toggle");
+        })
+    </script>
+</body>
+
+</html>

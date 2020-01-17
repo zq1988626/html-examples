@@ -1,0 +1,100 @@
+.yxmc,body {
+	font-family: "microsoft yahei";
+}
+.yxmc{ background-color: #000;display: inline-block;}
+.yxmc .piebox{width:100%; height: 500px; display: inline-block;background: url(img/bkg_coalyard.png) no-repeat center 180px;}
+.yxmc .pie,body,svg,img{
+	-webkit-touch-callout: none;
+	-webkit-user-select:none;
+	-khtml-user-select:none;
+	-moz-user-select: none;
+	-ms-user-select:none;
+	user-select: none;
+}
+
+path.slice{
+	stroke-width:2px;
+}
+
+.yxmc .polyline{
+	opacity: .3;
+	stroke: black;
+	stroke-width: 2px;
+	fill: none;
+} 
+.yxmc svg text.percent{
+	fill:#000;
+	text-anchor:middle;
+	font-size:12px;
+}
+
+.yxmc .topimg{position: relative;top: 137px;max-width:290px;}
+.yxmc .topimgBox{ pointer-events: none;  height: 0px; text-align: center; }
+
+
+
+.yxmc .focusLine{stroke:rgb(99,99,99);stroke-width:1}
+.yxmc .nomouse{pointer-events: none;}
+
+.yxmc .kdp text{ font-size:30px;}
+.yxmc .kdpLineBox { stroke: #fff;stroke-width:1px;}
+.yxmc .pie{ position: absolute; top: 20px;}
+
+.yxmc .alignRight{ text-align: right; width:50% }
+.yxmc .alignLeft{ text-align: left; width:50% }
+
+.yxmc .kdline {stroke: #000;stroke-width:1px;}
+.yxmc .kdLabel{ stroke: #fff;fill:#fff;stroke-width:0px; font-size: 18px;}
+.yxmc path.btn_left,.yxmc path.btn_right{ fill: #e8e8e8; cursor: pointer;stroke:#000}
+
+.yxmc .messagebox{height: 0px;z-index:2;  }
+.yxmc .messagebox > div{
+	background: rgba(0,0,0,0.6); 
+	padding:4px 6px 6px 6px; 
+	white-space: nowrap;
+	color: #fff; 
+	display: inline-block;text-align:left;
+	position: relative;
+	margin:10px;
+ 	line-height:20px;
+	height:18px;
+ 	opacity:0.6;
+	overflow:hidden;
+	transition:all 0.5s;
+	-moz-transition:all 0.5s; /* Firefox 4 */
+	-webkit-transition:all 0.5s; /* Safari and Chrome */
+	-o-transition:all 0.5s; /* Opera */
+}
+
+.yxmc .messagebox > div:hover:before{
+	content:"";
+ 	overflow:hidden;
+ 	height:0px;
+ 	margin-bottom:0px;
+}
+.yxmc .messagebox > div:before{
+	transition:all 0.5s;
+	-moz-transition:all 0.5s; /* Firefox 4 */
+	-webkit-transition:all 0.5s; /* Safari and Chrome */
+	-o-transition:all 0.5s; /* Opera */
+	content:"煤场详情";
+	width:100%;
+	display:block;
+ 	text-align:center;
+ 	height:22px;
+ 	line-height:22px;
+ 	overflow:hidden;
+ 	margin-bottom:0px;
+}
+.yxmc .messagebox > div:hover{
+	height:180px;
+ 	opacity:1;
+}
+
+#_Donut3dToolTip{
+		position: absolute; z-index: 2;
+		left:0px;pointer-events: none;
+		top:0px;
+		line-height:22px;  display: none ;white-space: nowrap; padding: 10px; 
+		background: rgba(0,0,0,0.6); color: #fff;
+}

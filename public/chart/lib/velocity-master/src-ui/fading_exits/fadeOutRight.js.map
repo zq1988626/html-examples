@@ -1,0 +1,1 @@
+{"version":3,"file":"fadeOutRight.js","sourceRoot":"","sources":["fadeOutRight.ts"],"names":[],"mappings":";AAAA;;;;;;GAMG;;AAEH,qDAAwC;AAExC,0BAAQ,CAAC,kBAAkB,EAAE,cAAc,EAAE;IAC5C,UAAU,EAAE,IAAI;IAChB,IAAI,EAAE;QACL,OAAO,EAAE,GAAG;QACZ,SAAS,EAAE,oBAAoB;KAC/B;IACD,MAAM,EAAE;QACP,OAAO,EAAE,GAAG;QACZ,SAAS,EAAE,uBAAuB;KAClC;CACD,CAAC,CAAC"}

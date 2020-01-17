@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>ID:<span id="txtID"></span></h1>
+    <h1>Name:<span id="txtName"></span></h1>
+    <input id="iptName" />
+    <button id="btnSave">保存</button>
+    <script type="text/javascript">
+        var model = {
+            id:1,
+            name:"n1"
+        }
+
+        var view = {
+            show:function(data){
+                document.getElementById("txtID").innerText = data.id;
+                document.getElementById("txtName").innerText = data.name;
+            },
+            update:function(name){
+                Presenter.setName(name);
+            }
+        }
+        document.getElementById("btnSave")
+        .addEventListener("click",function(){
+            view.update(document.getElementById("iptName").value);
+        });
+
+        var Presenter = {
+            setModelValue:function(k,v){
+                model[k] = v;
+            },
+            setName:function(v){
+                this.setModelValue("name",v);
+                view.show(model);
+            }
+        }
+        view.show(model);
+    </script>
+</body>
+
+</html>
