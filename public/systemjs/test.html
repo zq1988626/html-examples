@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>system.js</title>
+</head>
+<body>
+	<script type="systemjs-importmap2">
+	  {
+		"imports": {
+		  "saturn": "./testjs/a.js"
+		}
+	  }
+	</script>
+	<script src="/lib/system.js/dist/system.js"></script>
+	<script src="/lib/system.js/dist/extras/amd.js"></script>
+	<script>
+		System.config({
+			baseURL: '/app'
+		});
+	  	System.import('saturn');
+	</script>
+	<script>  
+		/*
+		System.config({
+			baseURL: '/app'
+		});
+		System.import('startup.js');
+		*/
+	</script>
+</body>
+</html>

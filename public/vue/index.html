@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Demo</title>
+    <style>
+        textarea{
+            width:500px;
+            height: 200px;
+        }
+        .app{
+            border:1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Vue.js 示例</h1>
+    <div id="apps">
+        <div data-app="app1" class="app">
+            <div id="app1">
+                <h1>{{title}}</h1>
+            </div>
+        </div>
+        <script>
+            function app1(container){
+                new Vue({
+                    el:"#app1",
+                    data:function(){
+                        return {
+                            title:"this is app1"
+                        }
+                    }
+                })
+            }
+        </script>
+        <div data-app="app2" class="app">
+            <div id="app2"></div>
+        </div>
+        <script>
+            function app2(container){
+                var judy = Vue.extend({
+                    template:'<p>{{message}}</p>',
+                    data: function () {
+                        return{
+                            message:'I am Judy'
+                        }
+                    }
+                });
+                var vm = new judy().$mount("#app2");
+            }
+        </script>
+    </div>
+    <br />
+    <input id="btnAdd" type="button" value="添加APP" />
+
+    <script>
+        var idindex = Date.now();
+        var tool = {
+            newid : function(before){
+                return before+(++idindex);
+            }
+        }
+        var render = function($item,fn){
+            var jscode = document.createElement("textarea");
+            var fnstr = fn.toString();
+            jscode.value = fn.toString().slice(fnstr.indexOf("{")+2,-1)
+            $item.after(jscode);
+            var htmlcode = document.createElement("textarea");
+            htmlcode.value = $item.innerHTML;
+            $item.after(htmlcode);
+            var btn = document.createElement("input");
+            btn.type="button";
+            btn.value = "run " + $item.dataset["app"];
+            btn.onclick = function(){
+                $item.innerHTML = htmlcode.value;
+                setTimeout(new Function(jscode.value));
+            }
+            jscode.after(btn);
+            jscode.after(document.createElement("br"));
+            fn();
+        }
+        var addApp = function(){
+            var newid = prompt("请输入APP名字",tool.newid("app"));
+            if(document.querySelectorAll("[data-app="+newid+"]").length>0){
+                alert("APP："+newid +" 已存在");
+                addApp();
+                return;
+            }
+            var container = document.createElement("div");
+            container.dataset["app"]=newid;
+            container.className="app";
+            container.innerHTML="<div id=\""+newid+"\"></div>"
+            document.getElementById("apps").append(container);
+            var fn = new Function('document.getElementById("'+newid+'").innerHTML="new APP '+ newid +'";');
+            render(container,fn);
+        }
+        window.onload=function(){
+            //return;
+            var containers = document.querySelectorAll("[data-app]");
+            for(var i=0;i<containers.length;i++){
+                render(containers[i],window[containers[i].dataset["app"]])
+            }
+
+            document.getElementById("btnAdd").onclick = addApp
+        }
+    </script>
+    <script src="/lib/Vue/dist/Vue.js"></script>
+</body>
+</html>

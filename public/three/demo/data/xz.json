@@ -1,0 +1,197 @@
+{
+	"metadata": {
+		"version": 4.5,
+		"type": "Object",
+		"generator": "Object3D.toJSON"
+	},
+	"geometries": [
+		{
+			"uuid": "4BEA7279-516F-4E32-B00E-82131A5DBDAC",
+			"type": "LatheBufferGeometry",
+			"points": [
+				{
+					"x": 0.3,
+					"y": 0
+				},
+				{
+					"x": 0.3,
+					"y": 0.6
+				},
+				{
+					"x": 0,
+					"y": 0.6
+				}],
+			"segments": 12,
+			"phiStart": 0,
+			"phiLength": 2.617994
+		},
+		{
+			"uuid": "9DA179A4-07BA-44F5-A4F6-774375E7930C",
+			"type": "LatheBufferGeometry",
+			"points": [
+				{
+					"x": 0.3,
+					"y": 0
+				},
+				{
+					"x": 0.3,
+					"y": 0.5
+				},
+				{
+					"x": 0,
+					"y": 0.5
+				}],
+			"segments": 12,
+			"phiStart": 4.363323,
+			"phiLength": 1.919862
+		},
+		{
+			"uuid": "2294E747-2427-47B3-BAA9-DC09B81246E6",
+			"type": "LatheBufferGeometry",
+			"points": [
+				{
+					"x": 0.3,
+					"y": 0
+				},
+				{
+					"x": 0.3,
+					"y": 0.8
+				},
+				{
+					"x": 0,
+					"y": 0.8
+				}],
+			"segments": 12,
+			"phiStart": 2.617994,
+			"phiLength": 1.745329
+		}],
+	"materials": [
+		{
+			"uuid": "E6FAA194-93A1-4073-B353-BA1E8BD4BD28",
+			"type": "MeshStandardMaterial",
+			"color": 16711808,
+			"roughness": 1,
+			"metalness": 0,
+			"emissive": 0,
+			"side": 2,
+			"depthFunc": 3,
+			"depthTest": true,
+			"depthWrite": true,
+			"stencilWrite": false,
+			"stencilWriteMask": 255,
+			"stencilFunc": 519,
+			"stencilRef": 0,
+			"stencilFuncMask": 255,
+			"stencilFail": 7680,
+			"stencilZFail": 7680,
+			"stencilZPass": 7680
+		},
+		{
+			"uuid": "50D6B2AF-12C9-438A-95E1-F1CF52718CEC",
+			"type": "MeshStandardMaterial",
+			"color": 32960,
+			"roughness": 1,
+			"metalness": 0,
+			"emissive": 0,
+			"side": 2,
+			"depthFunc": 3,
+			"depthTest": true,
+			"depthWrite": true,
+			"stencilWrite": false,
+			"stencilWriteMask": 255,
+			"stencilFunc": 519,
+			"stencilRef": 0,
+			"stencilFuncMask": 255,
+			"stencilFail": 7680,
+			"stencilZFail": 7680,
+			"stencilZPass": 7680
+		},
+		{
+			"uuid": "9CEC03D7-AEDA-4755-83AA-A4C09D3212DA",
+			"type": "MeshStandardMaterial",
+			"color": 255,
+			"roughness": 1,
+			"metalness": 0,
+			"emissive": 0,
+			"side": 2,
+			"depthFunc": 3,
+			"depthTest": true,
+			"depthWrite": true,
+			"stencilWrite": false,
+			"stencilWriteMask": 255,
+			"stencilFunc": 519,
+			"stencilRef": 0,
+			"stencilFuncMask": 255,
+			"stencilFail": 7680,
+			"stencilZFail": 7680,
+			"stencilZPass": 7680
+		}],
+	"object": {
+		"uuid": "1DCC34D6-E771-4738-A8E6-C5DA431AB8C0",
+		"type": "Scene",
+		"name": "Scene",
+		"layers": 1,
+		"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+		"children": [
+			{
+				"uuid": "2A5BF88F-C696-4736-B6EB-0E421028DB7C",
+				"type": "Mesh",
+				"name": "Lathe",
+				"layers": 1,
+				"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0.7,-0.3,3,1],
+				"geometry": "4BEA7279-516F-4E32-B00E-82131A5DBDAC",
+				"material": "E6FAA194-93A1-4073-B353-BA1E8BD4BD28"
+			},
+			{
+				"uuid": "2C9E0458-6C3E-4664-BFAB-36DC24C13A2A",
+				"type": "Mesh",
+				"name": "Lathe",
+				"layers": 1,
+				"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0.7,-0.3,3,1],
+				"geometry": "9DA179A4-07BA-44F5-A4F6-774375E7930C",
+				"material": "50D6B2AF-12C9-438A-95E1-F1CF52718CEC"
+			},
+			{
+				"uuid": "FC58455D-BA6F-416C-A72C-4B620522530C",
+				"type": "Mesh",
+				"name": "Lathe",
+				"layers": 1,
+				"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0.7,-0.3,3,1],
+				"geometry": "2294E747-2427-47B3-BAA9-DC09B81246E6",
+				"material": "9CEC03D7-AEDA-4755-83AA-A4C09D3212DA"
+			},
+			{
+				"uuid": "56624794-0948-443D-9650-EA82F6749BC4",
+				"type": "AmbientLight",
+				"name": "AmbientLight",
+				"layers": 1,
+				"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+				"color": 2236962,
+				"intensity": 1
+			},
+			{
+				"uuid": "E89EF932-3FC0-49D6-9861-9C08876E6F9D",
+				"type": "DirectionalLight",
+				"name": "DirectionalLight",
+				"layers": 1,
+				"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,5,10,7.5,1],
+				"color": 16777215,
+				"intensity": 1,
+				"shadow": {
+					"camera": {
+						"uuid": "4A2360D8-4E15-447B-BFD0-71F64A439528",
+						"type": "OrthographicCamera",
+						"layers": 1,
+						"zoom": 1,
+						"left": -5,
+						"right": 5,
+						"top": 5,
+						"bottom": -5,
+						"near": 0.5,
+						"far": 500
+					}
+				}
+			}],
+		"background": 11184810
+	}
+}

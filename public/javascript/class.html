@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class</title>
+</head>
+<body>
+    <iframe src="sub.html"></iframe>
+    <script>
+        var __extends = (this && this.__extends) || (function () {
+            var extendStatics = function (sub, base) {
+                extendStatics = Object.setPrototypeOf ||
+                    ({ __proto__: [] } instanceof Array && function (sub, base) { sub.__proto__ = base; }) ||
+                    function (sub, base) { for (var p in base) if (base.hasOwnProperty(p)) sub[p] = base[p]; };
+                return extendStatics(sub, base);
+            }
+            return function (sub, base) {
+                extendStatics(sub, base);
+                function __() { this.constructor = sub; }
+                sub.prototype = base === null ? Object.create(base) : (__.prototype = base.prototype, new __());
+            };
+        })();
+        var Greeter = /** @class */ (function () {
+            function Greeter(message) {
+                this.greeting = message;
+            }
+            Greeter.prototype.greet = function () {
+                return "Hello, " + this.greeting;
+            };
+            Greeter.prototype.getClassPath = function(){
+                var proto = this.__proto__;
+                var names = [];
+                while(proto){
+                    names.push(proto.constructor.name)
+                    proto = proto.__proto__;
+                }
+                return names;
+            }
+            return Greeter;
+        }());
+        var Sub = /** @class */ (function (_super) {
+            __extends(Sub, _super);
+            function Sub(message) {
+                var _this = _super.call(this, message) || this;
+                _this.metting = message;
+                return _this;
+            }
+            Sub.prototype.greet = function () {
+                return "Sub";
+            };
+            return Sub;
+        }(Greeter));
+        var greeter = new Greeter("world");
+        var sub = new Sub("world");
+        var button = document.createElement('button');
+        button.textContent = "Say Hello";
+        button.onclick = function () {
+            alert(sub.getClassPath());
+        };
+        document.body.appendChild(button);
+    </script>
+</body>
+</html>

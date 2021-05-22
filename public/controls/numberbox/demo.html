@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input class="control-input-number" />
+    <script>
+        var addEvent = function (o, e, f) {
+        　　o.addEventListener ? o.addEventListener(e, f, false) : o.attachEvent('on'+e, function(){f.call(o)})
+        }
+        
+
+        var initControl = function(item){
+            addEvent(item,"keyup",function(){
+                var v = item.value;
+                if(v==""){return;}
+                //去除非
+                var first = v.substr(0,1);
+                v=v.replace(/[^\d|.]*/g,"")
+                .replace(".","#").replace(/\./g,"").replace("#",".");
+                
+                if(v==""){
+                    item.value = v;
+                    return;
+                }
+                var arr = v.toString().split(".");
+                if(arr.length>1){
+                    arr[1]=arr[1].substr(0,2)
+                }
+                v = arr.join(".");
+                if(first==="-"){
+                    v=first+v;
+                }
+                item.value = v;
+            })
+        }
+
+        Array.prototype.forEach.call(
+            document.getElementsByClassName("control-input-number"),
+            initControl
+        );
+    </script>
+</body>
+</html>

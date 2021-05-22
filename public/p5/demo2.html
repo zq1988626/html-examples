@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body > div {
+            display: inline-block;
+            margin:4px;
+            position: relative;
+        }
+        .wraper{
+            width:100px;
+            height:100px;
+        }
+    </style>
+</head>
+<body>
+    
+    <script src="https://cdn.bootcdn.net/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
+    <!--script src="p5.js/addons/p5.sound.js"></script-->
+    <script>
+        var myps = [];
+        myps.push((w,h)=>p=>{
+            p.setup = ()=> {
+                p.createCanvas(w, h);
+            };
+            p.draw = ()=> {
+                p.background(0);
+                p.fill(255);
+                p.rect(10, 10, 10, 80);
+            };
+        });
+        
+        myps.push((w,h)=>p=>{
+            p.setup = ()=> {
+                p.createCanvas(w, h);
+            };
+            p.draw = ()=> {
+                p.background(0);
+                p.fill(255);
+                p.rect(10, 10, 10, 80);
+                var d = new Date();
+                
+                p.rect(30, 20, d.getHours()*2, 10);
+                p.rect(30, 40, d.getSeconds(), 10);
+                p.rect(30, 60, d.getMilliseconds()/20, 10);
+            };
+        });
+
+        myps.push((w,h)=>p=>{
+            let img; // 声明变量 'img'
+            p.setup = ()=> {
+                p.createCanvas(w, h);
+                //p.noLoop()//draw 仅执行一次
+
+                // 设置图像大小 230x230 像素
+                img = p.createImage(30, 50);
+
+                // 将显示窗口的像素资料加载到 pixels[] 数组里
+                // 这函数必须在读写 pixels[] 之前被调用
+                img.loadPixels();
+                for (let x = 0; x < img.width; x++) {
+                    for (let y = 0; y < img.height; y++) {
+                        let a = p.map(y, 0, img.height, 255, 0);
+                        // 使用 set() 设置该位置像素的颜色
+                        img.set(x, y, [0, 153, 204, a]);
+                    }
+                }
+                // 使用 set() 后，必须调用updatePixels() 以使改变生效
+                img.updatePixels();
+            };
+            p.draw = ()=> {
+                p.background(0);
+                p.fill(255);
+                p.image(img, 10, 10);
+                p.image(img, p.mouseX - img.width / 2, p.mouseY - img.height / 2);
+            };
+        });
+
+        myps.push((w,h)=>p=>{
+            with(p){
+                function setup() {
+                    with(p){
+                        // create canvas
+                        p.createCanvas(w, h);
+                            
+                        input = createInput();
+                        input.position(0, 0);
+                        input.elt.style.width = "40px";
+                        input.width = 40;
+
+                        button = createButton('submit');
+                        button.position(input.x + input.width, 0);
+                        button.mousePressed(greet);
+
+                        greeting = createElement('text', 'name?');
+                        greeting.position(20, 20);
+
+                        textAlign(CENTER);
+                        textSize(10);
+                    }
+                }
+
+                function greet() {
+                    const name = input.value();
+                    greeting.html('hello ' + name + '!');
+                    input.value('');
+
+                    for (let i = 0; i < 200; i++) {
+                        push();
+                        fill(random(255), 255, 255);
+                        translate(random(width), random(height));
+                        rotate(random(2 * PI));
+                        text(name, 0, 0);
+                        pop();
+                    }
+                }
+            }
+            p.setup = setup;
+        });
+
+
+    </script>
+    <script>
+        function showExample(item) {
+            var div = document.createElement("div");
+            div.id = Date.now();
+            document.body.append(div);
+            new p5(item(700,700),div.id);
+        }
+        var createContainer = (item,index)=>{
+            let ele = document.createElement("div");
+            ele.className = "wraper"
+            ele.id = "container"+index;
+            let wrap = document.createElement("div");
+            wrap.append(ele);
+            let text = document.createElement("div");
+            wrap.append(text);
+            let button = document.createElement("button");
+            button.innerHTML = "show";
+            button.onclick = function(){
+                showExample(item);
+            } 
+            text.append(button);
+            document.body.append(wrap);
+            return ele.id;
+        }
+        myps = myps.map((item,i)=> new p5(item(100,100), createContainer(item,i)))
+    </script>
+</body>
+</html>

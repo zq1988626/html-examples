@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ol id="log"></ol>
+    <script src="/lib/jquery/dist/jquery.js"></script>
+    <script src="f.js"></script>
+    <script src="jclass.js"></script>
+    <script src="jclass2.js"></script>
+    <script src="proto-ext.js"></script>
+    <script>
+        var logDom = document.getElementById("log");
+        var createLogItem = function(text){
+            var dt = new Date();
+            var li = document.createElement("li");
+            li.innerText =[
+                [dt.getFullYear(),dt.getMonth()+1,dt.getDate()].join("-"),
+                [dt.getHours(),dt.getMinutes(),dt.getSeconds()].join(":"),
+                dt.getMilliseconds()
+           ].join(" ")+": " + text;
+           return li;
+        }
+        window.alert = function(msg){
+            logDom.append(createLogItem(msg))
+        }
+    </script>
+    <script>
+        var ClassA = function(){
+            this.name = "class-a"
+        }
+        ClassA.prototype.say = function(){alert(this.name);}
+
+        var ClassB = function(){
+            //调用父类构造函数
+            this.__super.apply(this,arguments)
+            this.age = 11
+        }
+        ClassB.prototype.sayage = function(){alert(this.age);}
+        
+        var g = function(){this.constructor = ClassB}
+        g.prototype = ClassA.prototype;
+        var classbproto = ClassB.prototype;
+        ClassB.prototype = new g();
+        for(var a in classbproto){
+            if(classbproto.hasOwnProperty(a)){
+                ClassB.prototype[a]=classbproto[a];
+            }
+        }
+        ClassB.prototype.__super = function(){
+            this.__proto__.__proto__.constructor.apply(this,arguments)
+        }
+
+        var c = new ClassB();
+        c.sayage();
+
+    </script>
+    <script>
+        var ClassA2 = function(){
+            this.name = "class-a"
+        }
+        ClassA2.prototype.say = function(){alert(this.name);}
+
+        var ClassB2 = function(){
+            //调用父类构造函数
+            this.__super.apply(this,arguments)
+            this.age = 11
+        }
+        ClassB2.prototype.sayage = function(){alert(this.age);}
+        
+        var extend = function(base,sub){
+            var __ = function(){this.constructor = sub;}
+            __.prototype = base.prototype;
+            var classbproto = sub.prototype;
+            sub.prototype = new __();
+            
+            for(var a in classbproto){
+                if(classbproto.hasOwnProperty(a)){
+                    sub.prototype[a]=classbproto[a];
+                }
+            }
+            sub.prototype.__super = function(){
+                this.__proto__.__proto__.constructor.apply(this,arguments)
+            }
+        }
+
+        extend(ClassA2,ClassB2)
+
+        /*
+        var g = function(){this.constructor = ClassB}
+        g.prototype = ClassA.prototype;
+        var classbproto = ClassB.prototype;
+        ClassB.prototype = new g();
+        for(var a in classbproto){
+            if(classbproto.hasOwnProperty(a)){
+                ClassB.prototype[a]=classbproto[a];
+            }
+        }
+        */
+
+        var c = new ClassB2();
+        c.say();
+
+    </script>
+    <script>
+        protoExt.appendGCToObject();
+		protoExt.appendEXToFunction();
+        function J3Base(name){
+            this.name = name;
+        }
+        J3Base.prototype.say = function(msg){
+            alert(msg);
+        }
+
+        function J3A(){
+            this.__super("J3A");
+        }
+        J3A.prototype.say = function(msg){
+            this.__proto__.say(this.name+":"+msg);
+        }
+
+        function J4B(){
+            this.name = "J4B"
+        }
+        J4B.prototype.say = function(msg){
+            this.__proto__.say("hi "+msg)
+        }
+
+        var J3C = J3Base.__extend(function J3C(){
+            J3Base.call(this,"J3C")
+        },{
+            say:function(msg){
+                J3Base.prototype.say.call(this,this.name+":"+msg)
+            }
+        })
+
+        var j3ca = new J3C();
+        j3ca.say("hello");
+
+        
+        var J3C2 = J3C.__extend(function J3C2(){
+            J3Base.call(this);
+            this.name = "j3c2";
+        },{
+            say:function(msg){
+                J3C.prototype.say.apply(this,arguments)
+            }
+        })
+        var j3c2a = new J3C2();
+        j3c2a.say("hello");
+    </script>
+    <script>
+        function Person(name){
+            this.name = name;
+            this.age = 10; 
+            this.type = "ren"
+        }
+        Person.prototype.gender = "女";
+        Person.prototype.say = function(){
+            alert(this.name);
+        }
+
+
+        var extendStatics = function (sub, base) {
+            for (var p in base) {
+                if (base.hasOwnProperty(p)){
+                    sub[p] = base[p];
+                }
+            }
+            function __() {this.constructor = sub;}
+            if(base === null){
+                sub.prototype = Object.create(base);
+            }else{
+                __.prototype = base.prototype;
+                sub.prototype = new __();
+                __.prototype._super = base;
+            }
+        }
+        function SubPerson(name){
+            this._super.call(this,name)
+            Person.call(this,name);
+            this.name = name;
+            this.age = 12;
+            this.birthday = "2019-01-01"
+        }
+        extendStatics(SubPerson,Person);
+        SubPerson.prototype.gender = "男";
+        SubPerson.prototype.sayage = function(){
+            alert(this.type + this.name + this.gender);
+        }
+
+        var Sub2 = function(){
+            this.constructor = SubPerson;
+        }
+        var s2 = new Sub2();
+        var sub = new SubPerson("hi");
+        sub.say();
+        
+        var Sub3 = jClass(Object,{
+            test:function(){alert(2)}
+        })
+        var s3 = new Sub3();
+        
+        var Sub4 = jClass2(
+            Object,{
+                test:function(){
+                    alert(1);
+                }
+            }
+        )
+        var s4 = new Sub4();
+        s4.test();
+    </script>
+    <script>
+        var DInput = (function(){
+            function DInput(){
+                var _ = this;
+                _.value = "";
+                _.isRender = false;
+                _.dom = document.createElement("div");
+                _.dom_input = document.createElement("input");
+                _.dom.append(_.dom_input);
+                _.dom_button = document.createElement("input");
+                _.dom_button.type="button";
+                _.dom_button.value = "测试";
+                _.dom_button.addEventListener("click",function(){
+                    alert(_.getValue());
+                })
+                _.dom.append(_.dom_button);
+                _.container = document.body;
+            }
+            DInput.prototype.getValue = function(v){
+                return this.dom_input.value;
+            }
+            DInput.prototype.setValue = function(){
+                this.dom_input.value = v;
+            }
+            DInput.prototype.getClassPath = function(){
+                var proto = this.__proto__;
+                var names = [];
+                while(proto){
+                    names.push(proto.constructor.name)
+                    proto = proto.__proto__;
+                }
+                return names;
+            }
+            return DInput;
+        })();
+
+        var Button = (function(DInput){
+            function Button(message) {
+                DInput.call(this, message) || this;
+                this.dom_button.value = "按钮"
+            }
+            F.__extends(Button, DInput);
+            Button.prototype.ggsx = function(){
+                alert(1);
+            };
+            Button.prototype.ggsx1  = 333;
+            return Button;
+        })(DInput)
+
+        var input1 = new DInput();
+        document.body.append(input1.dom);
+        /*
+        var Button = (function (_super) {
+            return Button;
+        }(Input));
+        */
+
+        var input2 = new Button();
+        document.body.append(input2.dom)
+    </script>
+</body>
+</html>
